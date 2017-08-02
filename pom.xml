@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.belms</groupId>
+  <artifactId>dream</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>dream.workspace</module>
+  	<module>dream.employee</module>
+  	<module>dream.inventory</module>
+  	<module>dream.customer</module>
+  	<module>dream.api</module>
+	<module>dream.services</module>
+  	<module>dream.repositories</module>
+  	<module>dream.api.dto</module>
+  </modules>
+</project>

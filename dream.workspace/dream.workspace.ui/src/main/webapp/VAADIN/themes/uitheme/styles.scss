@@ -1,0 +1,9 @@
+@import "addons.scss";
+@import "uitheme.scss";
+
+/* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
+/* The actual styles should be defined in uitheme.scss */
+.uitheme {
+  @include addons;
+  @include uitheme;
+}
