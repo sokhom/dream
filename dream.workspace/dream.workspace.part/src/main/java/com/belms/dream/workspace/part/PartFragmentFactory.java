@@ -29,7 +29,7 @@ public class PartFragmentFactory implements UIFragmentFactory {
 	@Override
 	public Component getFragment(EventBusProvider eventBusProvider) {
 		
-		System.out.println("create view");
+		System.out.println("create view part");
 //		return new CustomerViewImpl(eventBusProvider);
 		return null;
 	}
