@@ -4,6 +4,7 @@ import com.blems.dream.api.model.DefaultModel;
 import com.blems.dream.api.model.bom.Bom;
 import com.blems.dream.api.model.coa.ChartAccount;
 import com.blems.dream.api.model.product.Product;
+import com.blems.dream.api.model.tax.TaxRate;
 import com.blems.dream.api.model.uom.Uom;
 
 public class Part extends DefaultModel {
@@ -27,6 +28,7 @@ public class Part extends DefaultModel {
 	
 	private Bom defaultBom;
 	private Uom uom;
+	private TaxRate tax;
 	
 	private String alertNote;
 	
@@ -43,6 +45,9 @@ public class Part extends DefaultModel {
 	
 	
 	private float stdCost;
+	
+	private boolean trackingFlag;
+	private boolean serializedFlag;
 	
 	
 	
