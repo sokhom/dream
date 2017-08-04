@@ -12,6 +12,7 @@ import com.vaadin.ui.Component;
 
 public class PartFragmentFactory implements UIFragmentFactory {
 
+	
 	@Override
 	public UIFragmentInfo getUIFagmentInfo() {
 		UIFragmentInfo fragmentInfo = new UIFragmentInfo();
@@ -31,7 +32,7 @@ public class PartFragmentFactory implements UIFragmentFactory {
 		
 		System.out.println("create view part");
 //		return new CustomerViewImpl(eventBusProvider);
-		return null;
+		return new PartViewImp(eventBusProvider);
 	}
 
 

@@ -12,14 +12,13 @@ public class PartServiceFactory implements ServiceFactory {
 		return "PART_SERVICE";
 	}
 
-	public Service<?> getService() {
+	public Service<Part> getService() {
 		if(service == null){
 			service = new PartServiceImpl();
 			System.out.println("create part service");	
 		}else{
-			System.out.println("load cache service");
-		}
-		
+			System.out.println("load part cache service");
+		}		
 		return service;
 	}
 
