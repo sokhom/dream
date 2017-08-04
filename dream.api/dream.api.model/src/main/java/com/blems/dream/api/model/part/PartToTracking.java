@@ -15,4 +15,5 @@ public class PartToTracking extends BasedModel {
 	private PartTracking partTracking;
 	private boolean primaryFlag;
 
+	
 }
