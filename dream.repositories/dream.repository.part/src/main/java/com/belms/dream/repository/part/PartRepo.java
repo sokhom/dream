@@ -10,7 +10,6 @@ public class PartRepo extends AbstractRepo<Part> {
 	
 
 	public List getAll() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
