@@ -5,11 +5,13 @@
 package com.belms.dream.service.part;
 
 import java.util.List;
-import com.belms.dream.api.service.CrudService;
+
+import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
+import com.belms.dream.api.service.part.IPartService;
 import com.belms.dream.repository.part.PartRepo;
 import com.blems.dream.api.model.part.Part;
 
-public class PartServiceImpl implements CrudService<Part> {
+public class PartServiceImpl implements IPartService {
 
 	private PartRepo partRepo = new PartRepo();
 	public Part add(Part t) {
@@ -33,6 +35,10 @@ public class PartServiceImpl implements CrudService<Part> {
 
 	public List<Part> getAll() {
 		return partRepo.getAll();
+	}
+
+	public PartInitDataWrapperDto getInitData() {
+		return partRepo.getInitData();
 	}
 
 	
