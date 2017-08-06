@@ -16,7 +16,10 @@ public class PartViewImp extends AbstractMainView<Part, Part, PartInitDataWrappe
 	public PartViewImp(EventBusProvider eventBusProvider) {
 		super(eventBusProvider);
 		PartMainLayerPresenter partMainlayerPresenter = new PartMainLayerPresenter(this);
-//		initView();
+		this.setFilterListener(partMainlayerPresenter);
+		this.setShowItemListener(partMainlayerPresenter);
+		this.setSaveEntityListener(partMainlayerPresenter);
+		this.setRefreshEntityListener(partMainlayerPresenter);
 		
 	}
 	

@@ -9,9 +9,11 @@
   	<module>dream.employee</module>
   	<module>dream.inventory</module>
   	<module>dream.customer</module>
+  	<module>dream.part</module>
   	<module>dream.api</module>
 	<module>dream.services</module>
   	<module>dream.repositories</module>
   	<module>dream.api.dto</module>
+  	
   </modules>
 </project>

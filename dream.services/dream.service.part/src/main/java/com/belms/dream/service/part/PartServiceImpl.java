@@ -6,33 +6,33 @@ package com.belms.dream.service.part;
 
 import java.util.List;
 import com.belms.dream.api.service.CrudService;
+import com.belms.dream.repository.part.PartRepo;
 import com.blems.dream.api.model.part.Part;
 
 public class PartServiceImpl implements CrudService<Part> {
 
+	private PartRepo partRepo = new PartRepo();
 	public Part add(Part t) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	public void remove(Part t) {
-		// TODO Auto-generated method stub
+		partRepo.remove(t);
 		
 	}
 
 	public void edit(Part t) {
-		// TODO Auto-generated method stub
+		partRepo.edit(t);
 		
 	}
 
 	public Part getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return partRepo.getById(id);
 	}
 
 	public List<Part> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return partRepo.getAll();
 	}
 
 	

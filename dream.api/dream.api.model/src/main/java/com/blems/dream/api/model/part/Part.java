@@ -53,11 +53,296 @@ public class Part extends DefaultModel implements FilterItemList{
 	private boolean trackingFlag;
 	private boolean serializedFlag;
 	
-	
-	@Override
+
+
+
 	public String getDescription() {
-		
-		return null;
+		return description;
+	}
+
+
+	public String getNum() {
+		return num;
+	}
+
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
+
+	public String getDetails() {
+		return details;
+	}
+
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
+
+
+	public String getUpc() {
+		return upc;
+	}
+
+
+	public void setUpc(String upc) {
+		this.upc = upc;
+	}
+
+
+	public String getAbcCode() {
+		return abcCode;
+	}
+
+
+	public void setAbcCode(String abcCode) {
+		this.abcCode = abcCode;
+	}
+
+
+	public String getUrl() {
+		return url;
+	}
+
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+
+	public PartType getPartType() {
+		return partType;
+	}
+
+
+	public void setPartType(PartType partType) {
+		this.partType = partType;
+	}
+
+
+	public ChartAccount getCogsAccount() {
+		return cogsAccount;
+	}
+
+
+	public void setCogsAccount(ChartAccount cogsAccount) {
+		this.cogsAccount = cogsAccount;
+	}
+
+
+	public ChartAccount getInventoryAccount() {
+		return inventoryAccount;
+	}
+
+
+	public void setInventoryAccount(ChartAccount inventoryAccount) {
+		this.inventoryAccount = inventoryAccount;
+	}
+
+
+	public ChartAccount getCrapAccount() {
+		return crapAccount;
+	}
+
+
+	public void setCrapAccount(ChartAccount crapAccount) {
+		this.crapAccount = crapAccount;
+	}
+
+
+	public ChartAccount getAdjustmentAccount() {
+		return adjustmentAccount;
+	}
+
+
+	public void setAdjustmentAccount(ChartAccount adjustmentAccount) {
+		this.adjustmentAccount = adjustmentAccount;
+	}
+
+
+	public ChartAccount getVarianceAccount() {
+		return varianceAccount;
+	}
+
+
+	public void setVarianceAccount(ChartAccount varianceAccount) {
+		this.varianceAccount = varianceAccount;
+	}
+
+
+	public Product getDefaultProduct() {
+		return defaultProduct;
+	}
+
+
+	public void setDefaultProduct(Product defaultProduct) {
+		this.defaultProduct = defaultProduct;
+	}
+
+
+	public List<PartToTracking> getPartToTrackings() {
+		return partToTrackings;
+	}
+
+
+	public void setPartToTrackings(List<PartToTracking> partToTrackings) {
+		this.partToTrackings = partToTrackings;
+	}
+
+
+	public Bom getDefaultBom() {
+		return defaultBom;
+	}
+
+
+	public void setDefaultBom(Bom defaultBom) {
+		this.defaultBom = defaultBom;
+	}
+
+
+	public Uom getUom() {
+		return uom;
+	}
+
+
+	public void setUom(Uom uom) {
+		this.uom = uom;
+	}
+
+
+	public TaxRate getTax() {
+		return tax;
+	}
+
+
+	public void setTax(TaxRate tax) {
+		this.tax = tax;
+	}
+
+
+	public String getAlertNote() {
+		return alertNote;
+	}
+
+
+	public void setAlertNote(String alertNote) {
+		this.alertNote = alertNote;
+	}
+
+
+	public float getLen() {
+		return len;
+	}
+
+
+	public void setLen(float len) {
+		this.len = len;
+	}
+
+
+	public float getWidth() {
+		return width;
+	}
+
+
+	public void setWidth(float width) {
+		this.width = width;
+	}
+
+
+	public float getHeight() {
+		return height;
+	}
+
+
+	public void setHeight(float height) {
+		this.height = height;
+	}
+
+
+	public Uom getSizeUom() {
+		return sizeUom;
+	}
+
+
+	public void setSizeUom(Uom sizeUom) {
+		this.sizeUom = sizeUom;
+	}
+
+
+	public float getWeight() {
+		return weight;
+	}
+
+
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+
+
+	public Uom getWeightUom() {
+		return weightUom;
+	}
+
+
+	public void setWeightUom(Uom weightUom) {
+		this.weightUom = weightUom;
+	}
+
+
+	public boolean isAlwaysManufacture() {
+		return alwaysManufacture;
+	}
+
+
+	public void setAlwaysManufacture(boolean alwaysManufacture) {
+		this.alwaysManufacture = alwaysManufacture;
+	}
+
+
+	public boolean isPickedInUomPart() {
+		return pickedInUomPart;
+	}
+
+
+	public void setPickedInUomPart(boolean pickedInUomPart) {
+		this.pickedInUomPart = pickedInUomPart;
+	}
+
+
+	public float getStdCost() {
+		return stdCost;
+	}
+
+
+	public void setStdCost(float stdCost) {
+		this.stdCost = stdCost;
+	}
+
+
+	public boolean isTrackingFlag() {
+		return trackingFlag;
+	}
+
+
+	public void setTrackingFlag(boolean trackingFlag) {
+		this.trackingFlag = trackingFlag;
+	}
+
+
+	public boolean isSerializedFlag() {
+		return serializedFlag;
+	}
+
+
+	public void setSerializedFlag(boolean serializedFlag) {
+		this.serializedFlag = serializedFlag;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

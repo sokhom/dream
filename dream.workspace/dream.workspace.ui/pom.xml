@@ -92,7 +92,12 @@
 		<dependency>
 			<groupId>com.belms</groupId>
 			<artifactId>dream.workspace.part</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1-SNAPSHOT</version>			
+		</dependency>
+		<dependency>
+			<groupId>com.belms</groupId>
+			<artifactId>dream.service.part</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 

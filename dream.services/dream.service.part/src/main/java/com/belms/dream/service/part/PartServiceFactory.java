@@ -2,6 +2,7 @@ package com.belms.dream.service.part;
 
 import com.belms.dream.api.service.Service;
 import com.belms.dream.api.service.ServiceFactory;
+import com.belms.dream.api.service.part.IPartService;
 import com.blems.dream.api.model.part.Part;
 
 public class PartServiceFactory implements ServiceFactory {
@@ -9,7 +10,7 @@ public class PartServiceFactory implements ServiceFactory {
 	Service<Part> service;
 	
 	public String getId() {
-		return "PART_SERVICE";
+		return IPartService.ID;
 	}
 
 	public Service<Part> getService() {

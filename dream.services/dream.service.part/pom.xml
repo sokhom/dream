@@ -6,4 +6,10 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>dream.service.part</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.belms</groupId>
+  		<artifactId>dream.api.service</artifactId>
+  	</dependency>
+  </dependencies>
 </project>
