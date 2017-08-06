@@ -12,6 +12,7 @@
 		<module>dream.repositories.employee</module>
 		<module>dream.repository.customer</module>
 		<module>dream.repository.common</module>
+		<module>dream.repository.part</module>
 	</modules>
 
 	<dependencyManagement>
