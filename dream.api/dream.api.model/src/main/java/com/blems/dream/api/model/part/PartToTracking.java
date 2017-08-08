@@ -14,6 +14,33 @@ public class PartToTracking extends BasedModel {
 	private Part part;
 	private PartTracking partTracking;
 	private boolean primaryFlag;
+	public String getNextValue() {
+		return nextValue;
+	}
+	public void setNextValue(String nextValue) {
+		this.nextValue = nextValue;
+	}
+	public Part getPart() {
+		return part;
+	}
+	public void setPart(Part part) {
+		this.part = part;
+	}
+	public PartTracking getPartTracking() {
+		return partTracking;
+	}
+	public void setPartTracking(PartTracking partTracking) {
+		this.partTracking = partTracking;
+	}
+	public boolean isPrimaryFlag() {
+		return primaryFlag;
+	}
+	public void setPrimaryFlag(boolean primaryFlag) {
+		this.primaryFlag = primaryFlag;
+	}
+	
+	
+	
 
 	
 }
