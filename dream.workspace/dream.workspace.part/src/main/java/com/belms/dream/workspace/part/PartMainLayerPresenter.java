@@ -28,7 +28,7 @@ public class PartMainLayerPresenter implements FilterListener,ShowSlectedItemLis
 	}
 	@Override
 	public void itemSelected(Part selectedITem) {
-		
+		partView.loadData(partService.getById(selectedITem.getId()));
 		
 	}
 	@Override

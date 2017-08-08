@@ -32,7 +32,7 @@ public class PartGeneral extends VerticalLayout  implements EntryView<Part>{
 
 		final TextField nameTextField = new TextField("Name");
 		
-//		binder.bind(nameTextField, Customer::getName, Customer::setName);
+		binder.bind(nameTextField, Part::getName, Part::setName);
 //		nameTextField.setRequiredIndicatorVisible(true);
 
 		formLayout.addComponent(nameTextField);
