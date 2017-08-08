@@ -14,6 +14,12 @@ public class PartToTracking extends BasedModel {
 	private Part part;
 	private PartTracking partTracking;
 	private boolean primaryFlag;
+	
+	public PartToTracking(String nextValue,PartTracking partTracking) {
+		setNextValue(nextValue);
+		setPartTracking(partTracking);
+		
+	}
 	public String getNextValue() {
 		return nextValue;
 	}

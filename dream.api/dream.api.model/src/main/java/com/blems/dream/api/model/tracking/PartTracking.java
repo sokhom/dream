@@ -13,6 +13,12 @@ public class PartTracking extends DefaultModel {
 	private int sortable;
 	private PartTrackingType type;
 	private String description;
+	
+	public PartTracking(String abbr,String name, PartTrackingType partTrackingType) {
+		setAbbr(abbr);
+		setName(name);
+		setType(partTrackingType);
+	}
 	public String getAbbr() {
 		return abbr;
 	}

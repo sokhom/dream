@@ -7,7 +7,10 @@ import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
 import com.blems.dream.api.model.coa.ChartAccount;
 import com.blems.dream.api.model.coa.CoAType;
 import com.blems.dream.api.model.part.Part;
+import com.blems.dream.api.model.part.PartToTracking;
 import com.blems.dream.api.model.part.PartType;
+import com.blems.dream.api.model.tracking.PartTracking;
+import com.blems.dream.api.model.tracking.PartTrackingType;
 import com.blems.dream.api.model.uom.Uom;
 
 import dream.repository.common.AbstractRepo;
@@ -15,7 +18,7 @@ import dream.repository.common.AbstractRepo;
 public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 	
 	private List<Part> parts;
-	
+	private List<PartToTracking> partToTrackings;
 	public List<Part> getAll() {
 		initPartList();
 		return parts;
@@ -83,12 +86,27 @@ public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 	}
 	
 	private Part createPart(int id,String name,Uom uom,PartType partType){
+		initDataPartToTracking();
 		Part part = new Part();
 		part.setId(id);
 		part.setName(name);
 		part.setUom(uom);
 		part.setPartType(partType);
+		part.setPartToTrackings(partToTrackings);
 		return part;
+	}
+	
+	private void initDataPartToTracking(){
+		if(partToTrackings==null){
+			partToTrackings = new ArrayList<>();
+			partToTrackings.add(createPartToTracking());
+		}
+	}
+	
+	private PartToTracking createPartToTracking(){
+		PartToTracking pToTrack = new PartToTracking("ve-152",new PartTracking("sfd", "dsfds", new PartTrackingType("dsfd")));
+		
+		return pToTrack;
 	}
 
 }
