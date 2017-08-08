@@ -4,6 +4,7 @@ import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
 import com.belms.dream.api.view.EntryView;
 import com.blems.dream.api.model.part.Part;
 import com.blems.dream.api.model.part.PartToTracking;
+import com.blems.dream.api.model.tracking.PartTracking;
 import com.vaadin.data.Binder;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.shared.ui.MarginInfo;
@@ -71,6 +72,7 @@ public class PartDetail extends VerticalLayout  implements EntryView<Part>{
 	
 	private Grid<PartToTracking> getTrackingGrid(){
 		Grid<PartToTracking> grid = new Grid<>("Tracking");
+		grid.addColumn(PartToTracking::getPartTracking);
 		return grid;
 	}
 
