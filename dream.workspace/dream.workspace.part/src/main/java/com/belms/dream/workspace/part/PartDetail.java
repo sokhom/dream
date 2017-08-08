@@ -7,9 +7,13 @@ import com.vaadin.ui.VerticalLayout;
 
 public class PartDetail extends VerticalLayout  implements EntryView<Part>{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public boolean isValid() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
