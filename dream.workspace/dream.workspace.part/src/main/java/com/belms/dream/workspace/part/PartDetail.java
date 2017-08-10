@@ -2,11 +2,12 @@ package com.belms.dream.workspace.part;
 
 import java.util.List;
 
+//import org.vaadin.grid.cellrenderers.editoraware.CheckboxRenderer;
+
 import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
 import com.belms.dream.api.view.EntryView;
 import com.blems.dream.api.model.part.Part;
 import com.blems.dream.api.model.part.PartToTracking;
-import com.blems.dream.api.model.tracking.PartTracking;
 import com.vaadin.data.Binder;
 import com.vaadin.data.ValueProvider;
 import com.vaadin.data.provider.CallbackDataProvider;
@@ -18,7 +19,6 @@ import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.renderers.ButtonRenderer;
 import com.vaadin.ui.themes.ValoTheme;
 
 public class PartDetail extends VerticalLayout  implements EntryView<Part>{
@@ -84,17 +84,36 @@ public class PartDetail extends VerticalLayout  implements EntryView<Part>{
 	private Grid<PartToTracking> getTrackingGrid(){
 		Grid<PartToTracking> grid = new Grid<>("Tracking");
 
-		grid.addColumn(PartToTracking::getNextValue).setCaption("NextValue");
-//		grid.addColumn("Primary",new ButtonRenderer<PartToTracking>());
-		ValueProvider<PartToTracking, String> valueProvider = new ValueProvider<PartToTracking, String>() {
+		
+		
+		ValueProvider<PartToTracking, String> partTrackingProvider = new ValueProvider<PartToTracking, String>() {
 			@Override
-			public String apply(PartToTracking source) {
-				
+			public String apply(PartToTracking source) {				
 				return source.getPartTracking().getName();
 			}
 		};
-		grid.addColumn(valueProvider).setCaption("Part Type");
+		grid.addColumn(partTrackingProvider).setCaption("Name");
+		grid.addColumn(new ValueProvider<PartToTracking, String>() {
+			@Override
+			public String apply(PartToTracking source) {				
+				return source.getPartTracking().getType().getName();
+			}
+		}).setCaption("Abbr");
+		grid.addColumn(new ValueProvider<PartToTracking, String>() {
+			@Override
+			public String apply(PartToTracking source) {				
+				return source.getPartTracking().getAbbr();
+			}
+		}).setCaption("Type");
+		grid.addColumn(PartToTracking::getNextValue).setCaption("NextValue");
+//		grid.addColumn(new ValueProvider<PartToTracking, Boolean>() {
+//			@Override
+//			public Boolean apply(PartToTracking source) {				
+//				return source.isPrimaryFlag();
+//			}
+//		}).setCaption("Primary");
 		
+//		grid.addColumn("Primary", new CheckboxRenderer());
 		
 		return grid;
 	}

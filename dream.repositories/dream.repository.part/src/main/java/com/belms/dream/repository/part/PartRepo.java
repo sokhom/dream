@@ -93,8 +93,8 @@ public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 	private void initDataPartToTracking(){
 		if(partToTrackings==null){
 			partToTrackings = new ArrayList<>();
-			partToTrackings.add(createPartToTracking("AA-102",new PartTracking("AA", "AA", new PartTrackingType("Inventory"))));
-			partToTrackings.add(createPartToTracking("BB-152",new PartTracking("BB", "BB", new PartTrackingType("Inventory"))));
+			partToTrackings.add(createPartToTracking("Lot100",new PartTracking("Lot#", "Lot Number", new PartTrackingType("Text"))));
+			partToTrackings.add(createPartToTracking("200.Rev",new PartTracking("Rev#", "Revision Level", new PartTrackingType("Text"))));
 		}
 	}
 	
