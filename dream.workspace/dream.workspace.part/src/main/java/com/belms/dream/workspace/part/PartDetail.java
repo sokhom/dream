@@ -87,7 +87,6 @@ public class PartDetail extends VerticalLayout  implements EntryView<Part>{
 		grid.addColumn(PartToTracking::getNextValue).setCaption("NextValue");
 //		grid.addColumn("Primary",new ButtonRenderer<PartToTracking>());
 		ValueProvider<PartToTracking, String> valueProvider = new ValueProvider<PartToTracking, String>() {
-
 			@Override
 			public String apply(PartToTracking source) {
 				
