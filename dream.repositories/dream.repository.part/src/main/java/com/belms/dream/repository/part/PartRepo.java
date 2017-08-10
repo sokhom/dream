@@ -42,8 +42,6 @@ public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 		return t;
 	}
 
-
-
 	@Override
 	public void remove(Part t) {
 		initPartList();
@@ -51,14 +49,10 @@ public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 		
 	}
 
-
-
 	@Override
 	public Part edit(Part t) {		
 		return super.edit(t);
 	}
-
-
 
 	@Override
 	public PartInitDataWrapperDto getInitData() {
@@ -99,12 +93,13 @@ public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 	private void initDataPartToTracking(){
 		if(partToTrackings==null){
 			partToTrackings = new ArrayList<>();
-			partToTrackings.add(createPartToTracking());
+			partToTrackings.add(createPartToTracking("AA-102",new PartTracking("AA", "AA", new PartTrackingType("Inventory"))));
+			partToTrackings.add(createPartToTracking("BB-152",new PartTracking("BB", "BB", new PartTrackingType("Inventory"))));
 		}
 	}
 	
-	private PartToTracking createPartToTracking(){
-		PartToTracking pToTrack = new PartToTracking("ve-152",new PartTracking("sfd", "dsfds", new PartTrackingType("dsfd")));
+	private PartToTracking createPartToTracking(String name,PartTracking partTracking){
+		PartToTracking pToTrack = new PartToTracking(name, partTracking);
 		
 		
 		return pToTrack;

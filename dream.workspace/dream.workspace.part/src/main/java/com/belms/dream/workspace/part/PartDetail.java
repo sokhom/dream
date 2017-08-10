@@ -13,7 +13,6 @@ import com.vaadin.data.provider.CallbackDataProvider;
 import com.vaadin.data.provider.DataProvider;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.shared.ui.grid.renderers.ButtonRendererState;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Grid;
@@ -87,6 +86,15 @@ public class PartDetail extends VerticalLayout  implements EntryView<Part>{
 
 		grid.addColumn(PartToTracking::getNextValue).setCaption("NextValue");
 //		grid.addColumn("Primary",new ButtonRenderer<PartToTracking>());
+		ValueProvider<PartToTracking, String> valueProvider = new ValueProvider<PartToTracking, String>() {
+
+			@Override
+			public String apply(PartToTracking source) {
+				
+				return source.getPartTracking().getName();
+			}
+		};
+		grid.addColumn(valueProvider).setCaption("Part Type");
 		
 		
 		return grid;
