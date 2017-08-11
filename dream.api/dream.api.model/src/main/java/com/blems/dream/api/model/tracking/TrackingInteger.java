@@ -17,5 +17,7 @@ public class TrackingInteger extends BasedModel2 {
 	private int info;
 	private PartTracking partTracking;
 	private Tag tag;
+	
+	
 
 }
