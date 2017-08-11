@@ -36,7 +36,7 @@ public class PartInitDataWrapperDto {
 	}
 	public List<ChartAccount> getCoaList() {
 		if(coaList==null){
-			coaList = new ArrayList();
+			coaList = new ArrayList<ChartAccount>();
 		}
 		return coaList;
 	}
@@ -45,7 +45,7 @@ public class PartInitDataWrapperDto {
 	}
 	public List<Customer> getDefaultCustomers() {
 		if(defaultCustomers==null){
-			defaultCustomers = new ArrayList();
+			defaultCustomers = new ArrayList<Customer>();
 		}
 		return defaultCustomers;
 	}
@@ -54,7 +54,7 @@ public class PartInitDataWrapperDto {
 	}
 	public List<PartType> getPartTypes() {
 		if(partTypes==null){
-			partTypes = new ArrayList();
+			partTypes = new ArrayList<PartType>();
 		}
 		return partTypes;
 	}
@@ -63,7 +63,7 @@ public class PartInitDataWrapperDto {
 	}
 	public List<Location> getLocation() {
 		if(location==null){
-			location = new ArrayList();
+			location = new ArrayList<Location>();
 		}
 		return location;
 	}
@@ -78,7 +78,7 @@ public class PartInitDataWrapperDto {
 	}
 	public List<ProductTree> getProductTree() {
 		if(productTree==null){
-			productTree = new ArrayList();
+			productTree = new ArrayList<ProductTree>();
 		}
 		return productTree;
 	}

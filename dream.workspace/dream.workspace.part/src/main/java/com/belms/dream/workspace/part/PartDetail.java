@@ -17,6 +17,7 @@ import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
@@ -83,28 +84,20 @@ public class PartDetail extends VerticalLayout  implements EntryView<Part>{
 	
 	private Grid<PartToTracking> getTrackingGrid(){
 		Grid<PartToTracking> grid = new Grid<>("Tracking");
+		// Connect selected Customer to editor or hide if none is selected
+				grid.asSingleSelect().addValueChangeListener(e -> {
+//					editor.editCustomer(e.getValue());
+				});
 
+		// switch to multiselect mode
+		grid.setSelectionMode(SelectionMode.MULTI);
 		
 		
-		ValueProvider<PartToTracking, String> partTrackingProvider = new ValueProvider<PartToTracking, String>() {
-			@Override
-			public String apply(PartToTracking source) {				
-				return source.getPartTracking().getName();
-			}
-		};
+		grid.setColumnReorderingAllowed(true);
+		ValueProvider<PartToTracking, String> partTrackingProvider = source -> source.getPartTracking().getName();
 		grid.addColumn(partTrackingProvider).setCaption("Name");
-		grid.addColumn(new ValueProvider<PartToTracking, String>() {
-			@Override
-			public String apply(PartToTracking source) {				
-				return source.getPartTracking().getType().getName();
-			}
-		}).setCaption("Abbr");
-		grid.addColumn(new ValueProvider<PartToTracking, String>() {
-			@Override
-			public String apply(PartToTracking source) {				
-				return source.getPartTracking().getAbbr();
-			}
-		}).setCaption("Type");
+		grid.addColumn(source -> source.getPartTracking().getType().getName()).setCaption("Abbr");
+		grid.addColumn(source -> source.getPartTracking().getAbbr()).setCaption("Type");
 		grid.addColumn(PartToTracking::getNextValue).setCaption("NextValue");
 //		grid.addColumn(new ValueProvider<PartToTracking, Boolean>() {
 //			@Override
