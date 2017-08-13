@@ -14,6 +14,11 @@ public class PartViewImp extends AbstractMainView<Part, Part, PartInitDataWrappe
 	private static final long serialVersionUID = 1L;
 	private PartMainLayerPresenter partMainlayerPresenter;
 	private EntryView<Part> partDetail;
+	private EntryView<Part> partAccount;
+	private EntryView<Part> partInventory;
+	private EntryView<Part> partLocation;
+	private EntryView<Part> partMemo;
+	private EntryView<Part> partVendors;
 	public PartViewImp(EventBusProvider eventBusProvider) {
 		super(eventBusProvider);
 		PartMainLayerPresenter partMainlayerPresenter = new PartMainLayerPresenter(this);
@@ -31,7 +36,18 @@ public class PartViewImp extends AbstractMainView<Part, Part, PartInitDataWrappe
 		addTab(entryView);
 		partDetail = new PartDetail(getDataInitWrapper());
 		addTab(partDetail);
+		partAccount = new PartAccounts(getDataInitWrapper());
+		addTab(partAccount);
+		partInventory = new PartInventory(getDataInitWrapper());
+		addTab(partInventory);
+		partLocation = new PartLocation(getDataInitWrapper());
+		addTab(partLocation);
+		partMemo = new PartMemo(getDataInitWrapper());
+		addTab(partMemo);
+		partVendors = new PartVendors(getDataInitWrapper());
+		addTab(partVendors);
 	}
+	
 
 	@Override
 	public Window getNewView() {

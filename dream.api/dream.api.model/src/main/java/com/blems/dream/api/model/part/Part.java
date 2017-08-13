@@ -29,6 +29,7 @@ public class Part extends DefaultModel implements FilterItemList{
 	
 	private Product defaultProduct;
 	private List<PartToTracking> partToTrackings;
+	private List<Product> products;
 	
 	private Bom defaultBom;
 	private Uom uom;
@@ -343,6 +344,16 @@ public class Part extends DefaultModel implements FilterItemList{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 	
 	
