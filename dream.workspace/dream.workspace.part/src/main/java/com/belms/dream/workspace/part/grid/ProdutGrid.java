@@ -3,6 +3,7 @@ package com.belms.dream.workspace.part.grid;
 import java.util.Set;
 
 import com.belms.dream.workspace.part.AbstractGridCRUDButtonBar;
+import com.belms.dream.workspace.part.windows.PartProductWindow;
 import com.blems.dream.api.model.product.Product;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Window;
@@ -59,7 +60,9 @@ public class ProdutGrid extends AbstractGridCRUDButtonBar<Product> {
 
 	@Override
 	protected Window getNewView() {
-		return null;
+		PartProductWindow partPronew = new PartProductWindow();
+		partPronew.initView();
+		return partPronew;
 	}
 
 
