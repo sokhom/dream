@@ -43,7 +43,7 @@ public abstract class AbstractGridCRUDButtonBar<T> extends Panel implements Entr
 		menuBar.addStyleName(ValoTheme.MENUBAR_SMALL);
 
 		menuBar.addItem("", VaadinIcons.FILE_ADD, event -> {
-			UI.getCurrent().addWindow(getEditView());
+			UI.getCurrent().addWindow(getNewView());
 		});
 		menuBar.addItem("", VaadinIcons.EDIT, event->{
 			if(alterNoItemSelected(getNoItemSelectedToBeEditedMsg())){return;};
