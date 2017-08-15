@@ -4,6 +4,7 @@ import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
 import com.belms.dream.api.view.EntryView;
 import com.belms.dream.api.view.event.EventBusProvider;
 import com.belms.dream.workspace.common.mainview.AbstractMainView;
+import com.belms.dream.workspace.part.windows.NewPartViewImpl;
 import com.blems.dream.api.model.part.Part;
 import com.vaadin.ui.Window;
 
@@ -21,7 +22,7 @@ public class PartViewImp extends AbstractMainView<Part, Part, PartInitDataWrappe
 	private EntryView<Part> partVendors;
 	public PartViewImp(EventBusProvider eventBusProvider) {
 		super(eventBusProvider);
-		PartMainLayerPresenter partMainlayerPresenter = new PartMainLayerPresenter(this);
+		 partMainlayerPresenter = new PartMainLayerPresenter(this);
 		this.setFilterListener(partMainlayerPresenter);
 		this.setShowItemListener(partMainlayerPresenter);
 		this.setSaveEntityListener(partMainlayerPresenter);
@@ -51,7 +52,9 @@ public class PartViewImp extends AbstractMainView<Part, Part, PartInitDataWrappe
 
 	@Override
 	public Window getNewView() {
-		return null;
+		NewPartViewImpl newPart = new NewPartViewImpl(getEventBusProvider(),getDataInitWrapper());
+		newPart.initView();
+		return newPart ;
 	}
 
 }

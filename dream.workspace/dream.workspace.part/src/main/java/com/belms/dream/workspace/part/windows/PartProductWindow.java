@@ -2,7 +2,6 @@ package com.belms.dream.workspace.part.windows;
 
 import com.belms.dream.api.view.event.SaveEntityListener;
 import com.belms.dream.workspace.common.window.AbstractSimpleDialog;
-import com.blems.dream.api.model.contact.Contact;
 import com.blems.dream.api.model.product.Product;
 import com.vaadin.ui.VerticalLayout;
 
@@ -28,7 +27,7 @@ public class PartProductWindow extends AbstractSimpleDialog implements SaveEntit
 	@Override
 	protected String getDialogCaption() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Product";
 	}
 
 	@Override
