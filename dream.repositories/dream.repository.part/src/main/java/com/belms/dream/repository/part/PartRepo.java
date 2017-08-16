@@ -101,6 +101,12 @@ public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 		la.add(createLocation("Stock 300",stockType));
 		la.add(createLocation("Shipping",shippingType));		
 		partInit.addLocationGroup(createLocationGroup("LA",la));
+//		Part Type
+		List<PartType> partTypes = new ArrayList<>(); 
+		partTypes.add(new PartType(10, "Inventory"));
+		partTypes.add(new PartType(20, "Service"));
+		partTypes.add(new PartType(40, "Non-Inventory"));
+		partInit.setPartTypes(partTypes);
 		
 		return partInit;
 	}

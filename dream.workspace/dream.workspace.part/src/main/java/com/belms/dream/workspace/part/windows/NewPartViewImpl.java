@@ -41,7 +41,7 @@ public class NewPartViewImpl extends AbstractNewView<Part> implements INewPartVi
 	@Override
 	protected List<StepView<Part>> getStepViews() {
 		List<StepView<Part>> steps = new ArrayList<>();
-		steps.add(new PartInfoStepView());
+		steps.add(new PartInfoStepView(partInitDataWrapper));
 		return steps;
 	}
 

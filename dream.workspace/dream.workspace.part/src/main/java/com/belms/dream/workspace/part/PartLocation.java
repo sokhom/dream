@@ -64,8 +64,7 @@ public class PartLocation extends VerticalLayout  implements EntryView<Part>{
 //		binder.forField(currencyComboBox).withValidator(new RequiredValidator()).bind(Customer::getCurrency, Customer::setCurrency);
 			 assetAccount.setDataProvider(new CallbackDataProvider<Location, String>(query->locG.getLocations().stream(), qyery->locG.getLocations().size()));
 			 formLayout.addComponent(assetAccount);			
-		}
-		
+		}		
 	}
 
 }
