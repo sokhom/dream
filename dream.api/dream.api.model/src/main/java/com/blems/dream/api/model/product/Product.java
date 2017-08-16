@@ -7,6 +7,8 @@ public class Product extends DefaultModel{
 	private static final long serialVersionUID = 1L;
 
 	private String description;
+	private String upc;
+	private float price;
 	
 	
 	public String getDescription() {
@@ -16,6 +18,26 @@ public class Product extends DefaultModel{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+	public String getUpc() {
+		return upc;
+	}
+
+
+	public void setUpc(String upc) {
+		this.upc = upc;
+	}
+
+
+	public float getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(float price) {
+		this.price = price;
 	}
 
 

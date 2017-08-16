@@ -59,6 +59,14 @@ public class ProductView extends VerticalLayout  implements EntryView<Part>{
 		final TextField descText = new TextField("Description");
 		binder.bind(descText, Product::getDescription,Product::setDescription);
 		formLayout.addComponent(descText);
+		
+		final TextField upcText = new TextField("UPC");
+		binder.bind(upcText, Product::getUpc,Product::setUpc);
+		formLayout.addComponent(upcText);
+		
+		final TextField priceText = new TextField("Price");
+		binder.bind(priceText, Product::getUpc,Product::setUpc);
+		formLayout.addComponent(priceText);
 	}
 
 	@Override
