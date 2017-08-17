@@ -8,6 +8,8 @@ import com.belms.dream.api.view.event.EventBusProvider;
 import com.belms.dream.workspace.common.newview.AbstractNewView;
 import com.belms.dream.workspace.common.newview.StepView;
 import com.belms.dream.workspace.part.step.PartInfoStepView;
+import com.belms.dream.workspace.part.step.PartToTrackingStepView;
+import com.blems.dream.api.model.customer.Customer;
 import com.blems.dream.api.model.part.Part;
 
 public class NewPartViewImpl extends AbstractNewView<Part> implements INewPartView  {
@@ -19,6 +21,7 @@ public class NewPartViewImpl extends AbstractNewView<Part> implements INewPartVi
 	private static final long serialVersionUID = 1L;
 	private final static String CAPTION = "<h3><b>New Part wizard</b></h3>";
 	private PartInitDataWrapperDto partInitDataWrapper;
+	private Part part;
 	public NewPartViewImpl(EventBusProvider eventBusProvider,PartInitDataWrapperDto partInitDataWrapper) {
 		super(eventBusProvider);
 		eventBusProvider.register(this);
@@ -28,20 +31,26 @@ public class NewPartViewImpl extends AbstractNewView<Part> implements INewPartVi
 		center();
 		setWidth(900, Unit.PIXELS);
 		setHeight(700, Unit.PIXELS);
-	}
-
-	
+		
+		part = new Part();
+		
+		initView();
+	}	
 
 	@Override
-	protected Part getNewItem() {
-		// TODO Auto-generated method stub
-		return null;
+	protected Part getNewItem() {		
+		return part;
 	}
 
 	@Override
 	protected List<StepView<Part>> getStepViews() {
 		List<StepView<Part>> steps = new ArrayList<>();
 		steps.add(new PartInfoStepView(partInitDataWrapper));
+		steps.add(new PartToTrackingStepView(partInitDataWrapper));
+		
+		for (StepView<Part> stepView : steps) {
+			stepView.loadData(part);
+		}
 		return steps;
 	}
 

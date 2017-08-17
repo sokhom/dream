@@ -1,5 +1,6 @@
 package com.blems.dream.api.model.part;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.blems.dream.api.model.DefaultModel;
@@ -183,6 +184,9 @@ public class Part extends DefaultModel implements FilterItemList{
 
 
 	public List<PartToTracking> getPartToTrackings() {
+		if(partToTrackings==null){
+			partToTrackings = new ArrayList<>();
+		}
 		return partToTrackings;
 	}
 

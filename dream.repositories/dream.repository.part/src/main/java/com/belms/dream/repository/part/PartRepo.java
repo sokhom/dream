@@ -107,6 +107,13 @@ public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 		partTypes.add(new PartType(20, "Service"));
 		partTypes.add(new PartType(40, "Non-Inventory"));
 		partInit.setPartTypes(partTypes);
+//		Part Tracking
+		partInit.addPartTracking(new PartTracking("Lot#", "Lot Number", new PartTrackingType("Text")));
+		partInit.addPartTracking(new PartTracking("Rev#", "Revision Level", new PartTrackingType("Text")));
+		partInit.addPartTracking(new PartTracking("ExpDate", "Expiration Date", new PartTrackingType("Expiration Date")));
+		partInit.addPartTracking(new PartTracking("SN(s)", "Serial Number", new PartTrackingType("Serial Number")));
+		
+		
 		
 		return partInit;
 	}

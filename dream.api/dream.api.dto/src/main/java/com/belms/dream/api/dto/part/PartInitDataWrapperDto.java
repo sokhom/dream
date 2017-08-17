@@ -9,6 +9,7 @@ import com.blems.dream.api.model.location.Location;
 import com.blems.dream.api.model.location.LocationGroup;
 import com.blems.dream.api.model.part.PartType;
 import com.blems.dream.api.model.product.ProductTree;
+import com.blems.dream.api.model.tracking.PartTracking;
 import com.blems.dream.api.model.uom.Uom;
 
 public class PartInitDataWrapperDto {
@@ -19,6 +20,8 @@ public class PartInitDataWrapperDto {
 	private List<LocationGroup> locationGroup;
 	private List<Uom> uom;
 	private List<ProductTree> productTree;
+	
+	private List<PartTracking> partTrackings;
 	
 	public void addCoAList(ChartAccount coa){
 		getCoaList().add(coa);
@@ -35,6 +38,12 @@ public class PartInitDataWrapperDto {
 	public void addProductTree(ProductTree productTree){
 		getProductTree().add(productTree);
 	}
+	public void addPartTracking(PartTracking partTracking){
+		getPartTrackings().add(partTracking);
+	}
+	
+
+	
 	public List<ChartAccount> getCoaList() {
 		if(coaList==null){
 			coaList = new ArrayList<ChartAccount>();
@@ -85,6 +94,18 @@ public class PartInitDataWrapperDto {
 	}
 	public void setProductTree(List<ProductTree> productTree) {
 		this.productTree = productTree;
+	}
+	public List<PartTracking> getPartTrackings() {
+		if(partTrackings==null){
+			partTrackings = new ArrayList<>();
+		}
+		return partTrackings;
+	}
+	public void setPartTrackings(List<PartTracking> partTrackings) {
+		this.partTrackings = partTrackings;
+	}
+	public void setLocationGroup(List<LocationGroup> locationGroup) {
+		this.locationGroup = locationGroup;
 	}
 	
 	

@@ -4,16 +4,10 @@ import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
 import com.belms.dream.workspace.common.newview.StepView;
 import com.belms.dream.workspace.part.PartGeneral;
 import com.belms.dream.workspace.part.comps.ProductView;
-import com.blems.dream.api.model.customer.Customer;
 import com.blems.dream.api.model.part.Part;
-import com.blems.dream.api.model.part.PartType;
 import com.vaadin.data.Binder;
-import com.vaadin.data.provider.CallbackDataProvider;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.Panel;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
 public class PartInfoStepView implements StepView<Part>{
@@ -25,9 +19,8 @@ public class PartInfoStepView implements StepView<Part>{
 		binder = new Binder<>();
 		this.partInitDataWrapperDto = partInitDataWrapperDto;
 	}
-	public boolean isValid() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isValid() {		
+		return true;
 	}
 
 	@Override
@@ -60,7 +53,7 @@ public class PartInfoStepView implements StepView<Part>{
 
 	@Override
 	public void loadData(Part data) {
-		// TODO Auto-generated method stub
+		binder.setBean(data);
 		
 	}
 
