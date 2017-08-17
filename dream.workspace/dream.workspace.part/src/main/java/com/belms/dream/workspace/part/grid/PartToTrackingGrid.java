@@ -32,7 +32,7 @@ public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryVi
 	@Override
 	public boolean isValid() {
 		
-		return false;
+		return true;
 	}
 
 
@@ -52,7 +52,7 @@ public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryVi
 //		}
 		for (PartTracking partTracking : partTrackings) {
 			PartToTracking pTT = new PartToTracking("", partTracking);
-//			itemList.add(pTT);
+			itemList.add(pTT);
 		}
 		
 		DataProvider<PartToTracking, String> searchListDataProvider = new CallbackDataProvider<>(query -> itemList.stream(), query -> itemList.size());

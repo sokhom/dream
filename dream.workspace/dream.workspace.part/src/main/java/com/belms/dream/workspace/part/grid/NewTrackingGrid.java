@@ -18,7 +18,7 @@ public class NewTrackingGrid extends AbstractGridCRUDButtonBar<PartTracking> {
 	@Override
 	public boolean isValid() {
 		
-		return false;
+		return true;
 	}
 
 	@Override

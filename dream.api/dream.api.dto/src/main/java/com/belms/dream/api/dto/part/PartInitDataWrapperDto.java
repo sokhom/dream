@@ -18,7 +18,7 @@ public class PartInitDataWrapperDto {
 	private List<Customer> defaultCustomers;
 	private List<PartType> partTypes;
 	private List<LocationGroup> locationGroup;
-	private List<Uom> uom;
+	private List<Uom> uoms;
 	private List<ProductTree> productTree;
 	
 	private List<PartTracking> partTrackings;
@@ -42,7 +42,9 @@ public class PartInitDataWrapperDto {
 		getPartTrackings().add(partTracking);
 	}
 	
-
+    public void addUOM(Uom uom){
+    	getUoms().add(uom);
+    }
 	
 	public List<ChartAccount> getCoaList() {
 		if(coaList==null){
@@ -80,11 +82,14 @@ public class PartInitDataWrapperDto {
 	public void setLocation(List<LocationGroup> locationGroup) {
 		this.locationGroup = locationGroup;
 	}
-	public List<Uom> getUom() {
-		return uom;
+	public List<Uom> getUoms() {
+		if(uoms==null){
+			uoms = new ArrayList<>();
+		}
+		return uoms;
 	}
-	public void setUom(List<Uom> uom) {
-		this.uom = uom;
+	public void setUoms(List<Uom> uom) {
+		this.uoms = uom;
 	}
 	public List<ProductTree> getProductTree() {
 		if(productTree==null){

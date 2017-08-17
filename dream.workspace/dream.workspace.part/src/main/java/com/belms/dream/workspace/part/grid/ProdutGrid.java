@@ -25,8 +25,7 @@ public class ProdutGrid extends AbstractGridCRUDButtonBar<Product> {
 	@Override
 	protected void initUI() {
 		addColumn(Product::getName).setCaption("Number");
-		addColumn(Product::getName).setCaption("Number");
-		
+		addColumn(Product::getName).setCaption("Number");		
 	}
 
 
@@ -36,8 +35,7 @@ public class ProdutGrid extends AbstractGridCRUDButtonBar<Product> {
 	}
 
 	@Override
-	public boolean isValid() {
-		
+	public boolean isValid() {		
 		return false;
 	}
 
@@ -67,8 +65,7 @@ public class ProdutGrid extends AbstractGridCRUDButtonBar<Product> {
 
 
 	@Override
-	protected Window getEditView() {
-		
+	protected Window getEditView() {		
 		return null;
 	}
 	

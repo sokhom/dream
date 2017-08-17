@@ -16,7 +16,7 @@ public class PartServiceImpl implements IPartService {
 	private PartRepo partRepo = new PartRepo();
 	public Part add(Part t) {
 		
-		return null;
+		return partRepo.add(t);
 	}
 
 	public void remove(Part t) {

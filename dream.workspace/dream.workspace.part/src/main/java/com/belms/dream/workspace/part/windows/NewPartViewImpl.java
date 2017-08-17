@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
+import com.belms.dream.api.view.event.AddnewEntityListener;
 import com.belms.dream.api.view.event.EventBusProvider;
 import com.belms.dream.workspace.common.newview.AbstractNewView;
 import com.belms.dream.workspace.common.newview.StepView;
@@ -30,8 +31,7 @@ public class NewPartViewImpl extends AbstractNewView<Part> implements INewPartVi
 		setCaptionAsHtml(true);
 		center();
 		setWidth(900, Unit.PIXELS);
-		setHeight(700, Unit.PIXELS);
-		
+		setHeight(700, Unit.PIXELS);		
 		part = new Part();
 		
 		initView();
@@ -40,6 +40,13 @@ public class NewPartViewImpl extends AbstractNewView<Part> implements INewPartVi
 	@Override
 	protected Part getNewItem() {		
 		return part;
+	}
+
+	
+	@Override
+	public void setAddNewListener(AddnewEntityListener<Part> addNewPartListener) {
+		setAddnewEntityListener(addNewPartListener);
+		
 	}
 
 	@Override

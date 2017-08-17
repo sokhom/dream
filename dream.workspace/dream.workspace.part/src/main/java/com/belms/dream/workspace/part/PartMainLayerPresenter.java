@@ -44,7 +44,9 @@ public class PartMainLayerPresenter implements FilterListener,ShowSlectedItemLis
 	}
 	@Override
 	public void addNew(Part t) {
-		// TODO Auto-generated method stub
+		partService.add(t);
+		this.partView.addNew(t);
+		System.out.println(t.getName() + " added");
 		
 	}
 	private void initData() {		

@@ -52,8 +52,8 @@ public class PartViewImp extends AbstractMainView<Part, Part, PartInitDataWrappe
 
 	@Override
 	public Window getNewView() {
-		NewPartViewImpl newPart = new NewPartViewImpl(getEventBusProvider(),getDataInitWrapper());
-		newPart.initView();
+		NewPartViewImpl newPart = new NewPartViewImpl(getEventBusProvider(),getDataInitWrapper());	
+		newPart.setAddNewListener(partMainlayerPresenter);
 		return newPart ;
 	}
 

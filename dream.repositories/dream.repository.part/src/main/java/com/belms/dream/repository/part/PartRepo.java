@@ -33,7 +33,7 @@ public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 	@Override
 	public Part getById(int id) {
 		initPartList();
-		return parts.get(id);
+		return parts.get(id-1);
 	}
 
 
@@ -113,7 +113,9 @@ public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 		partInit.addPartTracking(new PartTracking("ExpDate", "Expiration Date", new PartTrackingType("Expiration Date")));
 		partInit.addPartTracking(new PartTracking("SN(s)", "Serial Number", new PartTrackingType("Serial Number")));
 		
-		
+//		UOM
+		partInit.addUOM(new Uom(0, "ea"));
+		partInit.addUOM(new Uom(1, "m"));
 		
 		return partInit;
 	}
@@ -123,14 +125,14 @@ public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 			parts = new ArrayList<>();
 			List<Product> bbProducts = new ArrayList<>();
 			bbProducts.add(createProduct("BB-0012"));
-			parts.add(createPart(0, "BB-0012", new Uom(1, "ea"), new PartType(1, "Invetory"),bbProducts));
+			parts.add(createPart(1, "BB-0012", new Uom(1, "ea"), new PartType(1, "Invetory"),bbProducts));
 			bbProducts = new ArrayList<>();
 			bbProducts.add(createProduct("AA-00125"));
-			parts.add(createPart(1, "AA-00125", new Uom(1, "ea"), new PartType(1, "Invetory"),bbProducts));
+			parts.add(createPart(2, "AA-00125", new Uom(1, "ea"), new PartType(1, "Invetory"),bbProducts));
 			bbProducts = new ArrayList<>();
 			bbProducts.add(createProduct("CC-1200"));
 			bbProducts.add(createProduct("CC-855"));
-			parts.add(createPart(2, "CC-1200", new Uom(1, "ea"), new PartType(1, "Invetory"),bbProducts));
+			parts.add(createPart(3, "CC-1200", new Uom(1, "ea"), new PartType(1, "Invetory"),bbProducts));
 		}
 	}
 	

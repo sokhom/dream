@@ -15,22 +15,18 @@ public class PartInfoStepView implements StepView<Part>{
 
 	private final  Binder<Part> binder;
 	private PartInitDataWrapperDto partInitDataWrapperDto;
+	private VerticalLayout v;
+	private PartGeneral partGeneral;
 	public PartInfoStepView(PartInitDataWrapperDto partInitDataWrapperDto) {
 		binder = new Binder<>();
 		this.partInitDataWrapperDto = partInitDataWrapperDto;
-	}
-	public boolean isValid() {		
-		return true;
-	}
-
-	@Override
-	public Component getView() {
-		VerticalLayout v = new VerticalLayout();
+		
+		v = new VerticalLayout();
 		
 		Panel partPanel = new Panel();
 		partPanel.setCaption("Part");
-		PartGeneral frmLayout = new PartGeneral(partInitDataWrapperDto);
-		partPanel.setContent(frmLayout);	
+		partGeneral = new PartGeneral(partInitDataWrapperDto);
+		partPanel.setContent(partGeneral);	
 		
 		Panel productPanel = new Panel();
 		productPanel.setCaption("Product");
@@ -46,7 +42,13 @@ public class PartInfoStepView implements StepView<Part>{
 		
 		v.addComponent(partPanel);
 		v.addComponent(productPanel);
-		
+	}
+	public boolean isValid() {		
+		return true;
+	}
+
+	@Override
+	public Component getView() {
 
 		return v;
 	}
@@ -54,6 +56,7 @@ public class PartInfoStepView implements StepView<Part>{
 	@Override
 	public void loadData(Part data) {
 		binder.setBean(data);
+		partGeneral.loadData(data);
 		
 	}
 
@@ -64,7 +67,7 @@ public class PartInfoStepView implements StepView<Part>{
 
 	@Override
 	public boolean validationRequired() {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

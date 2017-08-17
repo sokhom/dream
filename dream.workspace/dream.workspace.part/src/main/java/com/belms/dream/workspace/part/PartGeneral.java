@@ -47,7 +47,8 @@ public class PartGeneral extends VerticalLayout  implements EntryView<Part>{
 		formLayout.addComponent(nameTextField);
 		
 		final ComboBox<Uom> uomComb = new ComboBox<Uom>("UOM");		
-		binder.forField(uomComb).bind(Part::getUom, null);
+		binder.forField(uomComb).bind(Part::getUom, Part::setUom);
+		uomComb.setDataProvider(new CallbackDataProvider<Uom,String>(query->partInitDataWrapperDto.getUoms().stream(),query->partInitDataWrapperDto.getUoms().size()));
 		formLayout.addComponent(uomComb);
 		
 		final ComboBox<PartType> partTypeComb = new ComboBox<PartType>("Type");		
