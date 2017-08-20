@@ -6,6 +6,7 @@ import java.util.List;
 import com.blems.dream.api.model.DefaultModel;
 import com.blems.dream.api.model.bom.Bom;
 import com.blems.dream.api.model.coa.ChartAccount;
+import com.blems.dream.api.model.location.Location;
 import com.blems.dream.api.model.product.Product;
 import com.blems.dream.api.model.tax.TaxRate;
 import com.blems.dream.api.model.ui.FilterItemList;
@@ -20,7 +21,8 @@ public class Part extends DefaultModel implements FilterItemList{
 	private String upc;
 	private String abcCode;
 	private String url;
-	private PartType partType;
+	private PartType partType;	
+	private PartCost partCost;
 	
 	private ChartAccount cogsAccount;
 	private ChartAccount inventoryAccount;
@@ -359,6 +361,16 @@ public class Part extends DefaultModel implements FilterItemList{
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+
+
+	public PartCost getPartCost() {
+		return partCost;
+	}
+
+
+	public void setPartCost(PartCost partCost) {
+		this.partCost = partCost;
+	}	
 	
 	
 	

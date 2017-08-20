@@ -70,5 +70,10 @@ public class PartInfoStepView implements StepView<Part>{
 		
 		return false;
 	}
+	@Override
+	public boolean skipThisStep() {
+		
+		return false;
+	}
 
 }

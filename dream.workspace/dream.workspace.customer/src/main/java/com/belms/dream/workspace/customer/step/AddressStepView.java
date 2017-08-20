@@ -43,5 +43,10 @@ public class AddressStepView implements StepView<Customer> {
 		addressView.loadData(data.getAddresses());
 	}
 
+	@Override
+	public boolean skipThisStep() {
+		return false;
+	}
+
 
 }

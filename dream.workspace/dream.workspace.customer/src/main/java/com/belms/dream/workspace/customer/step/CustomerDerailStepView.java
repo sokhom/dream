@@ -42,6 +42,12 @@ public class CustomerDerailStepView implements StepView<Customer> {
 		entryView.loadData(data);
 		
 	}
+
+	@Override
+	public boolean skipThisStep() {
+		
+		return false;
+	}
 	
 }
  

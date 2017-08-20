@@ -83,10 +83,25 @@ public class PartRepo extends AbstractRepo<Part> implements IPartRepo {
 		LocationType inTransitType = createLocationType("In Transit");
 		// Consigment Group
 		List<Location> consignments = new ArrayList<>();
-		consignments.add(createLocation("Consignment 100",cosignmentType));
-		consignments.add(createLocation("Shipping",shippingType));
-		consignments.add(createLocation("Stock",stockType));
-		consignments.add(createLocation("Receiving",receivingType));		
+		Location loc =createLocation("Consignment 100",cosignmentType);
+		consignments.add(loc);
+		partInit.addLocatioin(loc);
+		loc=createLocation("Shipping",shippingType);
+		consignments.add(loc);
+		partInit.addLocatioin(loc);
+		
+		loc=createLocation("Stock",stockType);
+		consignments.add(loc);
+		partInit.addLocatioin(loc);
+		
+		loc=createLocation("Receiving",stockType);
+		consignments.add(loc);
+		partInit.addLocatioin(loc);
+		
+		loc=createLocation("Receiving",stockType);
+		consignments.add(loc);
+		partInit.addLocatioin(loc);
+		
 		partInit.addLocationGroup(createLocationGroup("Consignment UT",consignments));
 		
 		// LA Group

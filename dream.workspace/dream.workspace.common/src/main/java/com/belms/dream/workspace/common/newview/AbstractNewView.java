@@ -13,6 +13,7 @@ import com.belms.dream.workspace.common.View;
 import com.google.common.eventbus.Subscribe;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
@@ -32,7 +33,7 @@ public abstract class AbstractNewView<T> extends Window implements View {
 	private int currentStepIndex = 0;
 	private List<StepView<T>> stepViews;
 	private AddnewEntityListener<T> addnewEntityListener; 
-
+	private  CssLayout stepItemsLayout;
 	public AbstractNewView(EventBusProvider eventBusProvider) {
 		this.eventBusProvider = eventBusProvider;
 	}
@@ -77,6 +78,23 @@ public abstract class AbstractNewView<T> extends Window implements View {
 		if (stepViews == null || stepViews.size() == 0) {
 			return;
 		}
+		/*
+		if(!getCurrentStepView().skipThisStep()){
+			int order = 0;
+//			stepItemsLayout.getComponent(currentStepIndex+1).setVisible(true);
+			if(stepItemsLayout!=null){
+				System.out.println(stepItemsLayout.getComponentCount());
+				for (Component component : stepItemsLayout) {	
+					if(component instanceof AbstractNewView.StepItem){					
+						StepItem stepItem = (StepItem)component;
+						order++;			
+						String caption = String.format("%d-%s ", order,stepItem.getStepView().getName());
+						stepItem.setValue(caption);
+	//					component.setVisible(true);
+					}
+				}
+			}
+		}*/
 		eventBusProvider.post(new StepViewSelectedEvent<T>(getCurrentStepView()));
 	}
 
@@ -99,6 +117,8 @@ public abstract class AbstractNewView<T> extends Window implements View {
 		}
 		
 		backButton.addClickListener(event -> {
+			goBackStep(backButton, nextButton);
+			/*
 			if (currentStepIndex - 1 >= 0) {
 				currentStepIndex--;
 				stepViewChanged();
@@ -111,10 +131,13 @@ public abstract class AbstractNewView<T> extends Window implements View {
 			if (!nextButton.isEnabled() && stepViews.size() > 1) {
 				nextButton.setEnabled(true);
 			}
+			*/
 		});
 
 		nextButton.addClickListener(event -> {
 		
+			goNextStep(backButton, nextButton);
+			/*
 			if(!this.getCurrentStepView().isValid()){
 				Notification.show("Data is not valid to go next", Type.ERROR_MESSAGE);
 				return;
@@ -132,7 +155,7 @@ public abstract class AbstractNewView<T> extends Window implements View {
 			if (!backButton.isEnabled()) {
 				backButton.setEnabled(true);
 			}
-
+			*/
 		});
 
 		final Button finishButton = new Button("Finish");
@@ -170,6 +193,60 @@ public abstract class AbstractNewView<T> extends Window implements View {
 		footerLayout.addComponent(group);
 	}
 	
+	private void goBackStep(Button backButton,Button nextButton){
+		if (currentStepIndex - 1 >= 0) {
+			currentStepIndex--;
+			StepView<T> nextStepVeiw = stepViews.get(currentStepIndex);
+			if(nextStepVeiw.skipThisStep()){
+				goBackStep(backButton, nextButton);
+			}else{
+				stepViewChanged();
+			}
+		}
+		if(currentStepIndex - 1 >=0){
+			StepView<T> nextStepVeiw = stepViews.get(currentStepIndex-1);
+			if(nextStepVeiw.skipThisStep()){
+				currentStepIndex--;
+			}
+		}
+		if (currentStepIndex <= 0) {
+			backButton.setEnabled(false);
+		}
+
+		if (!nextButton.isEnabled() && stepViews.size() > 1) {
+			nextButton.setEnabled(true);
+		}
+	}
+	private void goNextStep(Button backButton,Button nextButton){
+		if(!this.getCurrentStepView().isValid()){
+			Notification.show("Data is not valid to go next", Type.ERROR_MESSAGE);
+			return;
+		}		
+		if (currentStepIndex + 1 < stepViews.size()) {
+			currentStepIndex++;
+			StepView<T> nextStepVeiw = stepViews.get(currentStepIndex);
+			if(nextStepVeiw.skipThisStep()){
+				goNextStep(backButton, nextButton);
+			}else{
+				stepViewChanged();
+			}
+		}
+		if(currentStepIndex + 1 < stepViews.size()){
+			StepView<T> nextStepVeiw = stepViews.get(currentStepIndex+1);
+			if(nextStepVeiw.skipThisStep()){
+				currentStepIndex++;
+			}
+		}
+
+		if (currentStepIndex + 1 >= stepViews.size()) {
+			nextButton.setEnabled(false);
+		}
+
+		if (!backButton.isEnabled()) {
+			backButton.setEnabled(true);
+		}
+	}
+	
 	private StepView<T> getCurrentStepView(){
 		
 		if(this.stepViews==null || this.stepViews.size()==0){
@@ -180,7 +257,7 @@ public abstract class AbstractNewView<T> extends Window implements View {
 	}
 	
 	private void buildStepPanel(HorizontalSplitPanel mainPanel) {
-		final CssLayout stepItemsLayout = new CssLayout();
+		stepItemsLayout = new CssLayout();
 		mainPanel.setFirstComponent(stepItemsLayout);
 		stepItemsLayout.setPrimaryStyleName("valo-menu");
 		stepItemsLayout.addStyleName("valo-menuitems");
@@ -193,8 +270,14 @@ public abstract class AbstractNewView<T> extends Window implements View {
 
 		int i = 0;
 		for (StepView<T> stepView : stepViews) {
-			i++;
-			stepItemsLayout.addComponent(new StepItem(this, i, stepView));
+			if(!stepView.skipThisStep()){
+				i++;				
+			}
+			StepItem stepItem = new StepItem(this, i, stepView);
+			if(stepView.skipThisStep()){
+				stepItem.setVisible(false);
+			}
+			stepItemsLayout.addComponent(stepItem);
 		}
 	}
 
@@ -237,6 +320,10 @@ public abstract class AbstractNewView<T> extends Window implements View {
 			}
 		}
 
+		public StepView<T> getStepView() {
+			return stepView;
+		}
+		
 	}
 
 }

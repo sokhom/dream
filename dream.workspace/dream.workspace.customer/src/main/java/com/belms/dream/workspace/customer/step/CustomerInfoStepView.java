@@ -71,5 +71,11 @@ public class CustomerInfoStepView  implements StepView<Customer> {
 		
 	}
 
+	@Override
+	public boolean skipThisStep() {
+		
+		return false;
+	}
+
 
 }
