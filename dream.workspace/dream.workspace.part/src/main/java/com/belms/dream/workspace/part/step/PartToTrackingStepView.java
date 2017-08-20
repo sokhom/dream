@@ -65,7 +65,7 @@ public class PartToTrackingStepView implements StepView<Part>{
 	@Override
 	public boolean skipThisStep() {
 		
-		return true;
+		return false;
 	}
 
 }

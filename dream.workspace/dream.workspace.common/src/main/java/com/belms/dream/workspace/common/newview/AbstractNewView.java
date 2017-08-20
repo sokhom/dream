@@ -31,6 +31,7 @@ public abstract class AbstractNewView<T> extends Window implements View {
 	private final EventBusProvider eventBusProvider;
 	private final Panel stepViewPanel = new Panel();
 	private int currentStepIndex = 0;
+	private int currentStepViewIndex=0;
 	private List<StepView<T>> stepViews;
 	private AddnewEntityListener<T> addnewEntityListener; 
 	private  CssLayout stepItemsLayout;
@@ -194,12 +195,17 @@ public abstract class AbstractNewView<T> extends Window implements View {
 	}
 	
 	private void goBackStep(Button backButton,Button nextButton){
+		
+		if(currentStepIndex>currentStepViewIndex){
+			currentStepIndex=currentStepViewIndex;
+		}
 		if (currentStepIndex - 1 >= 0) {
 			currentStepIndex--;
 			StepView<T> nextStepVeiw = stepViews.get(currentStepIndex);
 			if(nextStepVeiw.skipThisStep()){
 				goBackStep(backButton, nextButton);
 			}else{
+				currentStepViewIndex = currentStepIndex;
 				stepViewChanged();
 			}
 		}
@@ -228,6 +234,7 @@ public abstract class AbstractNewView<T> extends Window implements View {
 			if(nextStepVeiw.skipThisStep()){
 				goNextStep(backButton, nextButton);
 			}else{
+				currentStepViewIndex = currentStepIndex;
 				stepViewChanged();
 			}
 		}
@@ -253,7 +260,7 @@ public abstract class AbstractNewView<T> extends Window implements View {
 			throw new RuntimeException("No step view setup");
 		}
 		
-		return this.stepViews.get(currentStepIndex);
+		return this.stepViews.get(currentStepViewIndex);
 	}
 	
 	private void buildStepPanel(HorizontalSplitPanel mainPanel) {
