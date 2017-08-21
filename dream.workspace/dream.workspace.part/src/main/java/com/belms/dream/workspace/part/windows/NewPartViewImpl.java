@@ -11,6 +11,7 @@ import com.belms.dream.workspace.common.newview.StepView;
 import com.belms.dream.workspace.part.step.PartInfoStepView;
 import com.belms.dream.workspace.part.step.PartInitInventoryStepView;
 import com.belms.dream.workspace.part.step.PartToTrackingStepView;
+import com.belms.dream.workspace.part.step.DefaultLocationStepView;
 import com.belms.dream.workspace.part.step.InventoryTrackingStepView;
 import com.blems.dream.api.model.customer.Customer;
 import com.blems.dream.api.model.part.Part;
@@ -58,6 +59,7 @@ public class NewPartViewImpl extends AbstractNewView<Part> implements INewPartVi
 		steps.add(new PartToTrackingStepView(partInitDataWrapper));
 		steps.add(new PartInitInventoryStepView(partInitDataWrapper));
 		steps.add(new InventoryTrackingStepView(partInitDataWrapper));
+		steps.add(new DefaultLocationStepView(partInitDataWrapper));
 		
 		for (StepView<Part> stepView : steps) {
 			stepView.loadData(part);

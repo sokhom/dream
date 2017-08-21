@@ -20,7 +20,7 @@ public class InventoryTrackingStepView implements StepView<Part>{
 	@Override
 	public boolean isValid() {
 		
-		return false;
+		return true;
 	}
 
 	@Override
