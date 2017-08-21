@@ -31,7 +31,9 @@ public abstract class AbstractNewView<T> extends Window implements View {
 	private final EventBusProvider eventBusProvider;
 	private final Panel stepViewPanel = new Panel();
 	private int currentStepIndex = 0;
+	//=> SKH(2017-08-20): skip step view
 	private int currentStepViewIndex=0;
+	//<= SKH
 	private List<StepView<T>> stepViews;
 	private AddnewEntityListener<T> addnewEntityListener; 
 	private  CssLayout stepItemsLayout;
@@ -79,24 +81,33 @@ public abstract class AbstractNewView<T> extends Window implements View {
 		if (stepViews == null || stepViews.size() == 0) {
 			return;
 		}
-		/*
-		if(!getCurrentStepView().skipThisStep()){
-			int order = 0;
-//			stepItemsLayout.getComponent(currentStepIndex+1).setVisible(true);
+		//=> SKH(2017-08-21)
+		refreshStepPanel();
+		//<=
+		eventBusProvider.post(new StepViewSelectedEvent<T>(getCurrentStepView()));
+	}
+	
+	//SKH(2017-08-21): refresh list step panel
+	private void refreshStepPanel(){
+		if(stepItemsLayout!=null){
+			int order = 0;			
 			if(stepItemsLayout!=null){
 				System.out.println(stepItemsLayout.getComponentCount());
 				for (Component component : stepItemsLayout) {	
 					if(component instanceof AbstractNewView.StepItem){					
 						StepItem stepItem = (StepItem)component;
-						order++;			
+						if(!stepItem.getStepView().skipThisStep()){
+							order++;
+							component.setVisible(true);
+						}else{
+							component.setVisible(false);
+						}
 						String caption = String.format("%d-%s ", order,stepItem.getStepView().getName());
 						stepItem.setValue(caption);
-	//					component.setVisible(true);
 					}
 				}
 			}
-		}*/
-		eventBusProvider.post(new StepViewSelectedEvent<T>(getCurrentStepView()));
+		}
 	}
 
 	private void buildButtons(VerticalLayout layout) {
@@ -118,7 +129,10 @@ public abstract class AbstractNewView<T> extends Window implements View {
 		}
 		
 		backButton.addClickListener(event -> {
+			//=> SKH(2017-08-20): skip step view
 			goBackStep(backButton, nextButton);
+			//<= SKH
+			//=> NG
 			/*
 			if (currentStepIndex - 1 >= 0) {
 				currentStepIndex--;
@@ -133,11 +147,13 @@ public abstract class AbstractNewView<T> extends Window implements View {
 				nextButton.setEnabled(true);
 			}
 			*/
+			//<= NG
 		});
 
 		nextButton.addClickListener(event -> {
-		
+			//SKH(2017-08-20): skip step view
 			goNextStep(backButton, nextButton);
+			//=> NG
 			/*
 			if(!this.getCurrentStepView().isValid()){
 				Notification.show("Data is not valid to go next", Type.ERROR_MESSAGE);
@@ -157,6 +173,7 @@ public abstract class AbstractNewView<T> extends Window implements View {
 				backButton.setEnabled(true);
 			}
 			*/
+			//<= NG
 		});
 
 		final Button finishButton = new Button("Finish");
@@ -326,7 +343,7 @@ public abstract class AbstractNewView<T> extends Window implements View {
 				addStyleName(STYLE_SELECTED);
 			}
 		}
-
+		//SKH(2017-08-20): skip step view
 		public StepView<T> getStepView() {
 			return stepView;
 		}
