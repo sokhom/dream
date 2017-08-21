@@ -2,7 +2,6 @@ package com.belms.dream.workspace.part.step;
 
 import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
 import com.belms.dream.workspace.common.newview.StepView;
-import com.belms.dream.workspace.part.comps.InitInventoryView;
 import com.belms.dream.workspace.part.comps.InventoryTrackingView;
 import com.blems.dream.api.model.part.Part;
 import com.vaadin.ui.Component;
@@ -13,6 +12,7 @@ public class InventoryTrackingStepView implements StepView<Part>{
 	private VerticalLayout vLayout;
 	private PartInitDataWrapperDto partInitDataWrapperDto;
 	private InventoryTrackingView	tagTrackingView ;
+	private Part part;
 	public InventoryTrackingStepView(PartInitDataWrapperDto partInitDataWrapperDto) {
 		this.partInitDataWrapperDto = partInitDataWrapperDto;
 		initUI();
@@ -29,7 +29,8 @@ public class InventoryTrackingStepView implements StepView<Part>{
 	}
 
 	@Override
-	public void loadData(Part data) {		
+	public void loadData(Part data) {	
+		this.part = data;
 		tagTrackingView.loadData(data.getPartToTrackings());
 	}
 
@@ -47,7 +48,10 @@ public class InventoryTrackingStepView implements StepView<Part>{
 	
 	@Override
 	public boolean skipThisStep() {
-		
+		String partNumber = part.getName();
+		if(partNumber!=null && !partNumber.isEmpty()){
+			return false;
+		}
 		return true;
 	}
 	private void initUI(){
