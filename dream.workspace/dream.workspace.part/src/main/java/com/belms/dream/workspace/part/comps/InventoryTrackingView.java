@@ -14,7 +14,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 
-public class TagTrackingView extends VerticalLayout  implements EntryView<List<PartToTracking>>{
+public class InventoryTrackingView extends VerticalLayout  implements EntryView<List<PartToTracking>>{
 
 	/**
 	 * 
@@ -22,7 +22,7 @@ public class TagTrackingView extends VerticalLayout  implements EntryView<List<P
 	private static final long serialVersionUID = 1L;
 	private PartInitDataWrapperDto partInitDataWrapperDto;
 	private Binder<List<PartToTracking>> binder;
-	public TagTrackingView(PartInitDataWrapperDto partInitDataWrapperDto) {
+	public InventoryTrackingView(PartInitDataWrapperDto partInitDataWrapperDto) {
 		this.binder = new Binder<>();
 		this.partInitDataWrapperDto = partInitDataWrapperDto;
 		

@@ -64,8 +64,11 @@ public class PartToTrackingStepView implements StepView<Part>{
 
 	@Override
 	public boolean skipThisStep() {
-		
-		return false;
+		String partNum = binder.getBean().getName();
+		if(partNum!=null && !partNum.isEmpty()){
+			return false;
+		}
+		return true;
 	}
 
 }

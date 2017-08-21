@@ -3,17 +3,17 @@ package com.belms.dream.workspace.part.step;
 import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
 import com.belms.dream.workspace.common.newview.StepView;
 import com.belms.dream.workspace.part.comps.InitInventoryView;
-import com.belms.dream.workspace.part.comps.TagTrackingView;
+import com.belms.dream.workspace.part.comps.InventoryTrackingView;
 import com.blems.dream.api.model.part.Part;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 
-public class TagTrackingStepView implements StepView<Part>{
+public class InventoryTrackingStepView implements StepView<Part>{
 
 	private VerticalLayout vLayout;
 	private PartInitDataWrapperDto partInitDataWrapperDto;
-	private TagTrackingView	tagTrackingView ;
-	public TagTrackingStepView(PartInitDataWrapperDto partInitDataWrapperDto) {
+	private InventoryTrackingView	tagTrackingView ;
+	public InventoryTrackingStepView(PartInitDataWrapperDto partInitDataWrapperDto) {
 		this.partInitDataWrapperDto = partInitDataWrapperDto;
 		initUI();
 	}
@@ -51,7 +51,7 @@ public class TagTrackingStepView implements StepView<Part>{
 		return true;
 	}
 	private void initUI(){
-		tagTrackingView = new TagTrackingView(partInitDataWrapperDto);
+		tagTrackingView = new InventoryTrackingView(partInitDataWrapperDto);
 		vLayout = new VerticalLayout();
 		vLayout.addComponent(tagTrackingView);
 	}
