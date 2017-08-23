@@ -14,6 +14,7 @@ public class PartToTracking extends BasedModel {
 	private Part part;
 	private PartTracking partTracking;
 	private boolean primaryFlag;
+	private boolean selectedFlag;
 	
 	public PartToTracking(String nextValue,PartTracking partTracking) {
 		setNextValue(nextValue);
@@ -43,6 +44,12 @@ public class PartToTracking extends BasedModel {
 	}
 	public void setPrimaryFlag(boolean primaryFlag) {
 		this.primaryFlag = primaryFlag;
+	}
+	public boolean isSelectedFlag() {
+		return selectedFlag;
+	}
+	public void setSelectedFlag(boolean selectedFlag) {
+		this.selectedFlag = selectedFlag;
 	}
 	
 	

@@ -1,9 +1,12 @@
 package com.belms.dream.workspace.part.grid;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
 import com.belms.dream.api.view.EntryView;
+import com.belms.dream.repository.part.PartRepo;
 import com.blems.dream.api.model.part.PartToTracking;
 import com.blems.dream.api.model.tracking.PartTracking;
 import com.vaadin.data.ValueProvider;
@@ -18,20 +21,24 @@ public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryVi
 	 */
 	private static final long serialVersionUID = 1L;
 	private PartInitDataWrapperDto partInitDataWrapper;
+	private Map<String, PartToTracking> partToTrackingMap;
 	
 	
 	public PartToTrackingGrid(PartInitDataWrapperDto partInitDataWrapper) {
 		setSizeFull();		
 		this.partInitDataWrapper = partInitDataWrapper;		
+		addColumn(PartToTracking::isSelectedFlag).setCaption("Selected");
 		ValueProvider<PartToTracking, String> trackingName = source->source.getPartTracking().getName();
 		addColumn(trackingName).setCaption("Name");
 		addColumn(PartToTracking::getNextValue).setCaption("Next Value");
+		addColumn(PartToTracking::isPrimaryFlag).setCaption("Primary");
+		
+		
 	}
 
 
 	@Override
-	public boolean isValid() {
-		
+	public boolean isValid() {		
 		return true;
 	}
 
@@ -45,18 +52,37 @@ public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryVi
 
 	@Override
 	public void loadData(List<PartToTracking> data) {	
+		addPartToTrackinIntoMap(data);
 		List<PartTracking> partTrackings= partInitDataWrapper.getPartTrackings();
 		List<PartToTracking> itemList =  data;
 //		if(itemList==null){
 //			itemList = new ArrayList<>();
 //		}
 		for (PartTracking partTracking : partTrackings) {
-			PartToTracking pTT = new PartToTracking("", partTracking);
-			itemList.add(pTT);
+			String name = partTracking.getName();
+			if(getPartToTracking(name)==null){
+				PartToTracking pTT = new PartToTracking("", partTracking);
+				itemList.add(pTT);
+			}
 		}
 		
 		DataProvider<PartToTracking, String> searchListDataProvider = new CallbackDataProvider<>(query -> itemList.stream(), query -> itemList.size());
 		setDataProvider(searchListDataProvider);
+	}
+	
+	private void addPartToTrackinIntoMap(List<PartToTracking> partToTrackings){
+		if(partToTrackingMap==null){
+			 partToTrackingMap = new HashMap<>();
+			 
+			 for (PartToTracking partTracking : partToTrackings) {
+				 partToTrackingMap.put(partTracking.getPartTracking().getName(), partTracking);
+			}
+			 
+		 }
+	}
+	private PartToTracking getPartToTracking(String name){
+		 
+		 return partToTrackingMap.get(name);
 	}
 	
 

@@ -7,7 +7,6 @@ import com.blems.dream.api.model.part.Part;
 import com.vaadin.data.Binder;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.RadioButtonGroup;
 import com.vaadin.ui.VerticalLayout;
 
 public class PartToTrackingStepView implements StepView<Part>{
@@ -20,20 +19,8 @@ public class PartToTrackingStepView implements StepView<Part>{
 	
 	public PartToTrackingStepView(PartInitDataWrapperDto partInitDataWrapperDto) {
 		this.binder = new Binder<>();
-		this.partInitDataWrapperDto = partInitDataWrapperDto;
-		
-		 vLayout = new VerticalLayout();
-			vLayout.setMargin(new MarginInfo(true, true));
-			vLayout.setSizeFull();
-//			Panel partPanel = new Panel();
-//			partPanel.setSizeFull();
-//			
-//			partPanel.setCaption("Part Tracking");
-		    trackingGrid = new PartToTrackingGrid(partInitDataWrapperDto);
-//			partPanel.setContent(trackingGrid);
-			vLayout.addComponent(trackingGrid);
-			
-			
+		this.partInitDataWrapperDto = partInitDataWrapperDto;		
+		initUI();
 	}
 	
 	@Override
@@ -69,6 +56,14 @@ public class PartToTrackingStepView implements StepView<Part>{
 			return false;
 		}
 		return true;
+	}
+	
+	private void initUI(){
+		vLayout = new VerticalLayout();
+		vLayout.setMargin(new MarginInfo(true, true));
+		vLayout.setSizeFull();
+	    trackingGrid = new PartToTrackingGrid(partInitDataWrapperDto);
+		vLayout.addComponent(trackingGrid);
 	}
 
 }
