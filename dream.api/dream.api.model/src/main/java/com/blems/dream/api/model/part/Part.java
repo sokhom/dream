@@ -6,8 +6,8 @@ import java.util.List;
 import com.blems.dream.api.model.DefaultModel;
 import com.blems.dream.api.model.bom.Bom;
 import com.blems.dream.api.model.coa.ChartAccount;
-import com.blems.dream.api.model.location.Location;
 import com.blems.dream.api.model.product.Product;
+import com.blems.dream.api.model.tag.Tag;
 import com.blems.dream.api.model.tax.TaxRate;
 import com.blems.dream.api.model.ui.FilterItemList;
 import com.blems.dream.api.model.uom.Uom;
@@ -32,6 +32,8 @@ public class Part extends DefaultModel implements FilterItemList{
 	
 	private Product defaultProduct;
 	private List<PartToTracking> partToTrackings;
+	private List<Tag> tags;
+	
 	private List<Product> products;
 	
 	private Bom defaultBom;
@@ -195,6 +197,18 @@ public class Part extends DefaultModel implements FilterItemList{
 
 	public void setPartToTrackings(List<PartToTracking> partToTrackings) {
 		this.partToTrackings = partToTrackings;
+	}
+
+	public List<Tag> getTags() {
+		if(tags==null){
+			tags = new ArrayList<>();
+		}
+		return tags;
+	}
+
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 
 

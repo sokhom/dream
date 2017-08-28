@@ -17,5 +17,26 @@ public class TrackingDate extends BasedModel2 {
 	private Date info;
 	private PartTracking partTracking;
 	private Tag tag;
+	
+	public Date getInfo() {
+		return info;
+	}
+	public void setInfo(Date info) {
+		this.info = info;
+	}
+	public PartTracking getPartTracking() {
+		return partTracking;
+	}
+	public void setPartTracking(PartTracking partTracking) {
+		this.partTracking = partTracking;
+	}
+	public Tag getTag() {
+		return tag;
+	}
+	public void setTag(Tag tag) {
+		this.tag = tag;
+	}
+	
+	
 
 }

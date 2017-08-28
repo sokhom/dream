@@ -31,7 +31,7 @@ public class InventoryTrackingStepView implements StepView<Part>{
 	@Override
 	public void loadData(Part data) {	
 		this.part = data;
-		tagTrackingView.loadData(data.getPartToTrackings());
+		tagTrackingView.loadData(data);
 	}
 
 	@Override

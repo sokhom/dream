@@ -14,6 +14,9 @@ import com.vaadin.data.provider.CallbackDataProvider;
 import com.vaadin.data.provider.DataProvider;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.renderers.ButtonRenderer;
+import com.vaadin.ui.renderers.ClickableRenderer.RendererClickEvent;
+import com.vaadin.ui.renderers.ClickableRenderer.RendererClickListener;
 
 public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryView<List<PartToTracking>>{	
 	/**
@@ -25,6 +28,7 @@ public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryVi
 	
 	
 	public PartToTrackingGrid(PartInitDataWrapperDto partInitDataWrapper) {
+		
 		setSizeFull();		
 		this.partInitDataWrapper = partInitDataWrapper;		
 		addColumn(PartToTracking::isSelectedFlag).setCaption("Selected");
@@ -32,11 +36,31 @@ public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryVi
 		addColumn(trackingName).setCaption("Name");
 		addColumn(PartToTracking::getNextValue).setCaption("Next Value");
 		addColumn(PartToTracking::isPrimaryFlag).setCaption("Primary");
+		ValueProvider<PartToTracking, String> isSelected = source->source.isSelectedFlag()+"";
+		ButtonRenderer<PartToTracking> btnRenderer = new ButtonRenderer<>(new RendererClickListener<PartToTracking>(){			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void click(RendererClickEvent<PartToTracking> event) {
+				PartToTracking item = event.getItem();
+				 boolean isSelected = item.isSelectedFlag();
+				 event.getItem().setSelectedFlag(!isSelected);
+				 getDataProvider().refreshItem(item);
+				
+			}
+			
+		});
+		
+	
+		
+		addColumn(isSelected,btnRenderer);
 		
 		
 	}
 
-
+     
 	@Override
 	public boolean isValid() {		
 		return true;
@@ -73,12 +97,10 @@ public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryVi
 	private void addPartToTrackinIntoMap(List<PartToTracking> partToTrackings){
 		if(partToTrackingMap==null){
 			 partToTrackingMap = new HashMap<>();
-			 
-			 for (PartToTracking partTracking : partToTrackings) {
-				 partToTrackingMap.put(partTracking.getPartTracking().getName(), partTracking);
-			}
-			 
 		 }
+		for (PartToTracking partTracking : partToTrackings) {
+			partToTrackingMap.put(partTracking.getPartTracking().getName(), partTracking);
+		}
 	}
 	private PartToTracking getPartToTracking(String name){
 		 

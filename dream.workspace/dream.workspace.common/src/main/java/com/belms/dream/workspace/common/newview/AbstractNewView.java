@@ -76,15 +76,19 @@ public abstract class AbstractNewView<T> extends Window implements View {
 	
 	protected abstract T getNewItem();
 	
-
+	
 	private void stepViewChanged() {
+		stepViewChanged(getCurrentStepView());
+	}
+	//NGP: 
+	private void stepViewChanged(StepView<T> currentStepView) {
 		if (stepViews == null || stepViews.size() == 0) {
 			return;
 		}
-		//=> SKH(2017-08-21)
+		//=> SKH(2017-08-21)		
 		refreshStepPanel();
 		//<=
-		eventBusProvider.post(new StepViewSelectedEvent<T>(getCurrentStepView()));
+		eventBusProvider.post(new StepViewSelectedEvent<T>(currentStepView));
 	}
 	
 	//SKH(2017-08-21): refresh list step panel
@@ -222,7 +226,7 @@ public abstract class AbstractNewView<T> extends Window implements View {
 			if(nextStepVeiw.skipThisStep()){
 				goBackStep(backButton, nextButton);
 			}else{
-				currentStepViewIndex = currentStepIndex;
+				currentStepViewIndex = currentStepIndex;				
 				stepViewChanged();
 			}
 		}
@@ -252,7 +256,9 @@ public abstract class AbstractNewView<T> extends Window implements View {
 				goNextStep(backButton, nextButton);
 			}else{
 				currentStepViewIndex = currentStepIndex;
-				stepViewChanged();
+				StepView<T> currentStepView = getCurrentStepView();
+				currentStepView.loadData(getNewItem());
+				stepViewChanged(currentStepView);
 			}
 		}
 		if(currentStepIndex + 1 < stepViews.size()){

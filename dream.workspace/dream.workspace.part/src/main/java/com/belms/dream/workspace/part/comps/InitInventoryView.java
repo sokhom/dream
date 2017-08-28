@@ -6,7 +6,6 @@ import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
 import com.belms.dream.api.view.EntryView;
 import com.belms.dream.workspace.common.validator.RequiredValidator;
 import com.blems.dream.api.model.location.Location;
-import com.blems.dream.api.model.part.Part;
 import com.blems.dream.api.model.tag.Tag;
 import com.blems.dream.api.model.uom.Uom;
 import com.vaadin.data.Binder;

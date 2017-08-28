@@ -44,7 +44,7 @@ public class PartInitInventoryStepView implements StepView<Part> {
 		data.setPartCost(partCost);
 		Tag tage = new Tag();
 		tage.setPart(data);
-//		this.binder.setBean(tage);
+		data.getTags().add(tage);
 		initInventoryView.loadData(tage);
 		
 	}
