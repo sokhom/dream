@@ -1,6 +1,9 @@
 package com.belms.dream.workspace.part.comps;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -11,10 +14,8 @@ import com.blems.dream.api.model.part.PartToTracking;
 import com.blems.dream.api.model.tag.Tag;
 import com.blems.dream.api.model.tracking.PartTracking;
 import com.blems.dream.api.model.tracking.PartTrackingType;
-import com.blems.dream.api.model.tracking.TrackingText;
 import com.vaadin.data.Binder;
 import com.vaadin.data.ValueProvider;
-import com.vaadin.data.converter.LocalDateTimeToDateConverter;
 import com.vaadin.server.Setter;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Component;
@@ -87,24 +88,78 @@ public class InventoryTrackingView extends VerticalLayout  implements EntryView<
 			if(isSelected){
 				if(TEXT_TRACKING.equals(trackingType)){
 					final TextField lotText = new TextField(trackingName);					
-					ValueProvider<Tag,String> getter = source ->source.getTrackingTextMapping(pTracking).getName();			
-					Setter<Tag, String> setter =(bean,fieldvalue)->{bean.getTrackingTextMapping(pTracking).setName(fieldvalue);};
-					binder.forField(lotText).bind(getter, setter);
-					
-					formLayout.addComponent(lotText);	
-					
+					ValueProvider<Tag,String> getter = source ->source.getTrackingTextMapping(pTracking).getInfo();	
+					Setter<Tag, String> setter =(bean,fieldvalue)->{bean.getTrackingTextMapping(pTracking).setInfo(fieldvalue);};
+					binder.forField(lotText).bind(getter, setter);					
+					formLayout.addComponent(lotText);						
+				}if(CHECK_BOX_TRACKING.equals(trackingType)){
+					final TextField lotText = new TextField(trackingName);					
+					ValueProvider<Tag,String> getter = source ->source.getTrackingTextMapping(pTracking).getInfo();			
+					Setter<Tag, String> setter =(bean,fieldvalue)->{bean.getTrackingTextMapping(pTracking).setInfo(fieldvalue);};
+					binder.forField(lotText).bind(getter, setter);					
+					formLayout.addComponent(lotText);						
 				}else if(EXPIRATION_DATE_TRACKING.equals(trackingType)){
 					final DateField expireDateText = new DateField(trackingName);
-					ValueProvider<Tag,LocalDate> getter = source ->{
-						
-						source.getTrackingDate().getInfo().toString();
-				              return  LocalDate.now();
+					ValueProvider<Tag,LocalDate> getter = source ->{						
+						Date date = source.getTrackingDate().getInfo();
+						LocalDate locDate = null;
+						if(date!=null){
+							Instant instant = Instant.ofEpochMilli(date.getTime());
+							locDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+						}						
+						return locDate;
 					};	
 					Setter<Tag, LocalDate> setter =(bean,fieldvalue)->{
-						Date date = new Date(fieldvalue.toString()) ; 
-						bean.getTrackingDate().setInfo(date);};
-					binder.forField(expireDateText).bind(getter, setter);
-					
+						Instant instant = fieldvalue.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+						Date res = Date.from(instant);
+						bean.getTrackingDate().setInfo(res);
+					};
+					binder.forField(expireDateText).bind(getter, setter);					
+					formLayout.addComponent(expireDateText);				
+				}if(MONEY_TRACKING.equals(trackingType)){
+					final TextField lotText = new TextField(trackingName);					
+					ValueProvider<Tag,String> getter = source ->source.getTrackingDecimal().toString();
+					Setter<Tag, String> setter =(bean,fieldvalue)->{
+						double money = Double.valueOf(fieldvalue);
+						bean.getTrackingDecimal().setInfo(money);
+					};
+					binder.forField(lotText).bind(getter, setter);					
+					formLayout.addComponent(lotText);						
+				}if(COUNT_TRACKING.equals(trackingType)){
+					final TextField lotText = new TextField(trackingName);					
+					ValueProvider<Tag,String> getter = source ->source.getTrackingInteger().toString();	
+					Setter<Tag, String> setter =(bean,fieldvalue)->{
+						int count = Integer.parseInt(fieldvalue);
+						bean.getTrackingInteger().setInfo(count);
+					};
+					binder.forField(lotText).bind(getter, setter);					
+					formLayout.addComponent(lotText);						
+				}if(QUANTITY_TRACKING.equals(trackingType)){
+					final TextField lotText = new TextField(trackingName);					
+					ValueProvider<Tag,String> getter = source ->source.getTrackingInteger().toString();	
+					Setter<Tag, String> setter =(bean,fieldvalue)->{
+						int count = Integer.parseInt(fieldvalue);
+						bean.getTrackingInteger().setInfo(count);
+					};
+					binder.forField(lotText).bind(getter, setter);					
+					formLayout.addComponent(lotText);						
+				}else if(DATE_TRACKING.equals(trackingType)){
+					final DateField expireDateText = new DateField(trackingName);
+					ValueProvider<Tag,LocalDate> getter = source ->{						
+						Date date = source.getTrackingDate().getInfo();
+						LocalDate locDate = null;
+						if(date!=null){
+							Instant instant = Instant.ofEpochMilli(date.getTime());
+							locDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+						}						
+						return locDate;
+					};	
+					Setter<Tag, LocalDate> setter =(bean,fieldvalue)->{
+						Instant instant = fieldvalue.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant();
+						Date res = Date.from(instant);
+						bean.getTrackingDate().setInfo(res);
+					};
+					binder.forField(expireDateText).bind(getter, setter);					
 					formLayout.addComponent(expireDateText);				
 				}else if(SERIAL_NUMBER_TRACKING.equals(trackingType)){
 					//			
@@ -113,5 +168,6 @@ public class InventoryTrackingView extends VerticalLayout  implements EntryView<
 		}
 		
 	}
+	
 	
 }

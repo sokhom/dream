@@ -17,5 +17,25 @@ public class TrackingText extends BasedModel2 {
 	private String info;
 	private PartTracking partTracking;
 	private Tag tag;
+	
+	public String getInfo() {
+		return info;
+	}
+	public void setInfo(String info) {
+		this.info = info;
+	}
+	public PartTracking getPartTracking() {
+		return partTracking;
+	}
+	public void setPartTracking(PartTracking partTracking) {
+		this.partTracking = partTracking;
+	}
+	public Tag getTag() {
+		return tag;
+	}
+	public void setTag(Tag tag) {
+		this.tag = tag;
+	}
 
+	
 }
