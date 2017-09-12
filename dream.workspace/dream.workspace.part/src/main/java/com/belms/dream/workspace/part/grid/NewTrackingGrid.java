@@ -2,18 +2,24 @@ package com.belms.dream.workspace.part.grid;
 
 import java.util.Set;
 
+import com.belms.dream.api.view.event.SaveEntityListener;
 import com.belms.dream.workspace.part.AbstractGridCRUDButtonBar;
 import com.blems.dream.api.model.tracking.PartTracking;
 import com.vaadin.data.ValueProvider;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Window;
 
-public class NewTrackingGrid extends AbstractGridCRUDButtonBar<PartTracking> {
+public class NewTrackingGrid extends AbstractGridCRUDButtonBar<PartTracking> implements SaveEntityListener<PartTracking> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	
+	public NewTrackingGrid() {
+		
+	}
 
 	@Override
 	public boolean isValid() {
@@ -52,5 +58,19 @@ public class NewTrackingGrid extends AbstractGridCRUDButtonBar<PartTracking> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void save(PartTracking bean, SaveEntityListener.OPER_TYPE type) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public PartTracking getBean(SaveEntityListener.OPER_TYPE type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 
 }

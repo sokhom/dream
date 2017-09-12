@@ -3,22 +3,21 @@ package com.belms.dream.workspace.part.grid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
-import com.belms.dream.api.view.EntryView;
-import com.belms.dream.repository.part.PartRepo;
+import com.belms.dream.api.view.event.SaveEntityListener;
+import com.belms.dream.workspace.part.AbstractGridCRUDButtonBar;
+import com.belms.dream.workspace.part.comps.AddPartToTrackingView;
 import com.blems.dream.api.model.part.PartToTracking;
-import com.blems.dream.api.model.tracking.PartTracking;
 import com.vaadin.data.ValueProvider;
 import com.vaadin.data.provider.CallbackDataProvider;
 import com.vaadin.data.provider.DataProvider;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.renderers.ButtonRenderer;
-import com.vaadin.ui.renderers.ClickableRenderer.RendererClickEvent;
-import com.vaadin.ui.renderers.ClickableRenderer.RendererClickListener;
+import com.vaadin.ui.Window;
 
-public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryView<List<PartToTracking>>{	
+public class PartToTrackingGrid extends AbstractGridCRUDButtonBar<PartToTracking> implements SaveEntityListener<PartToTracking> {	
 	/**
 	 * 
 	 */
@@ -31,36 +30,85 @@ public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryVi
 		
 		setSizeFull();		
 		this.partInitDataWrapper = partInitDataWrapper;		
+		
 		addColumn(PartToTracking::isSelectedFlag).setCaption("Selected");
 		ValueProvider<PartToTracking, String> trackingName = source->source.getPartTracking().getName();
 		addColumn(trackingName).setCaption("Name");
 		addColumn(PartToTracking::getNextValue).setCaption("Next Value");
 		addColumn(PartToTracking::isPrimaryFlag).setCaption("Primary");
-		ValueProvider<PartToTracking, String> isSelected = source->source.isSelectedFlag()+"";
-		ButtonRenderer<PartToTracking> btnRenderer = new ButtonRenderer<>(new RendererClickListener<PartToTracking>(){			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public void click(RendererClickEvent<PartToTracking> event) {
-				PartToTracking item = event.getItem();
-				 boolean isSelected = item.isSelectedFlag();
-				 event.getItem().setSelectedFlag(!isSelected);
-				 getDataProvider().refreshItem(item);
-				
-			}
-			
-		});
-		
-	
-		
-		addColumn(isSelected,btnRenderer);
+//		ValueProvider<PartToTracking, String> isSelected = source->source.isSelectedFlag()+"";
+//		ButtonRenderer<PartToTracking> btnRenderer = new ButtonRenderer<>(new RendererClickListener<PartToTracking>(){			/**
+//			 * 
+//			 */
+//			private static final long serialVersionUID = 1L;
+//
+//			@Override
+//			public void click(RendererClickEvent<PartToTracking> event) {
+//				PartToTracking item = event.getItem();
+//				 boolean isSelected = item.isSelectedFlag();
+//				 event.getItem().setSelectedFlag(!isSelected);
+//				 getDataProvider().refreshItem(item);
+//				
+//			}
+//			
+//		});
+//		
+//	
+//		
+//		addColumn(isSelected,btnRenderer);
 		
 		
 	}
 
-     
+	@Override
+	public void save(PartToTracking bean, OPER_TYPE type) {
+		
+		addItem(bean);		
+	}
+
+
+	@Override
+	public PartToTracking getBean(OPER_TYPE type) {
+		if(OPER_TYPE.ADD==type){
+			return new PartToTracking();
+		}
+		return null;
+	}
+
+
+	@Override
+	protected String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	protected void initUI() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	protected void afterItemDeleted(Set<PartToTracking> itemDeleted, Grid<PartToTracking> grid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	protected Window getNewView() {
+		AddPartToTrackingView window = new AddPartToTrackingView(this,OPER_TYPE.ADD,this.partInitDataWrapper.getPartTrackings());
+		window.initView();
+		return window;
+	}
+
+
+	@Override
+	protected Window getEditView() {		
+		return null;
+	}
 	@Override
 	public boolean isValid() {		
 		return true;
@@ -74,7 +122,7 @@ public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryVi
 	}
 
 
-	@Override
+	/*@Override
 	public void loadData(List<PartToTracking> data) {	
 		addPartToTrackinIntoMap(data);
 		List<PartTracking> partTrackings= partInitDataWrapper.getPartTrackings();
@@ -92,7 +140,7 @@ public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryVi
 		
 		DataProvider<PartToTracking, String> searchListDataProvider = new CallbackDataProvider<>(query -> itemList.stream(), query -> itemList.size());
 		setDataProvider(searchListDataProvider);
-	}
+	}*/
 	
 	private void addPartToTrackinIntoMap(List<PartToTracking> partToTrackings){
 		if(partToTrackingMap==null){
@@ -106,6 +154,7 @@ public class PartToTrackingGrid extends Grid<PartToTracking>  implements EntryVi
 		 
 		 return partToTrackingMap.get(name);
 	}
+	
 	
 
 

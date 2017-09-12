@@ -33,14 +33,15 @@ public abstract class AbstractGridCRUDButtonBar<T> extends Panel implements Entr
     private List<T> itemList;
 	
 	public AbstractGridCRUDButtonBar() {
-		setCaption(getTitle());
-		setSizeFull();
+		setCaption(getTitle());		
+		addStyleName(ValoTheme.FORMLAYOUT_LIGHT);
 		VerticalLayout hLayout = new VerticalLayout();
-		hLayout.setSizeFull();
+//		hLayout.setSizeFull();
 		final MenuBar menuBar = new MenuBar();
 		menuBar.setWidth(100, Unit.PERCENTAGE);
 		menuBar.addStyleName(ValoTheme.MENUBAR_BORDERLESS);
 		menuBar.addStyleName(ValoTheme.MENUBAR_SMALL);
+		menuBar.addStyleName(ValoTheme.TEXTAREA_ALIGN_RIGHT);
 
 		menuBar.addItem("", VaadinIcons.FILE_ADD, event -> {
 			UI.getCurrent().addWindow(getNewView());
@@ -72,6 +73,8 @@ public abstract class AbstractGridCRUDButtonBar<T> extends Panel implements Entr
 		hLayout.addComponent(grid);
 		setContent(hLayout);		
 		initUI();
+		grid.setSizeFull();
+		setSizeFull();
 	}
 	protected abstract String getTitle();	
 	protected abstract void initUI();
@@ -80,6 +83,11 @@ public abstract class AbstractGridCRUDButtonBar<T> extends Panel implements Entr
 	protected  String getNoItemSelectedToBeDeletedMsg(){return "No item is selected to be deleted.";}
 	protected abstract Window getNewView();
 	protected abstract Window getEditView();
+	
+	protected void addItem(T dataItem){
+		itemList.add(dataItem);
+		grid.getDataProvider().refreshAll();
+	}
 	
 	protected <V> Column<T, V> addColumn(ValueProvider<T, V> valueProvider) {
 	        return grid.addColumn(valueProvider);

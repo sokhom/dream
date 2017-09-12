@@ -104,28 +104,31 @@ public class PartInventory extends VerticalLayout  implements EntryView<Part>{
 		hLayoutInventory.addComponent(availableToPickUpText);
 		
 		formLayout.addComponent(getHLayout());
+		formLayout.setSizeFull();
 	}
 	
-	private GridLayout getHLayout(){
-		GridLayout hLayout = new GridLayout(2,1);
+	private HorizontalLayout getHLayout(){
+		HorizontalLayout hLayout = new HorizontalLayout();
+		hLayout.setSizeFull();
 		hLayout.setCaption("Reorder Information");
 		Grid<Product> g = new Grid<Product>();
+	      g.setSizeFull();
 		List<Product> itemList = new ArrayList<Product>();
 		g.setDataProvider(new CallbackDataProvider<>(query -> itemList.stream(), query -> itemList.size()));
 		g.addColumn(Product::getName).setCaption("Location Group");
 		g.addColumn(Product::getName).setCaption("Order Up to Level");
 		g.addColumn(Product::getName).setCaption("Reorder Point");
-		g.setWidth(80, Unit.PERCENTAGE);
+//		g.setWidth(100, Unit.PERCENTAGE);
 		hLayout.addComponent(g);
 		VerticalLayout vLayout = getVButtonCRUDBar();
-		vLayout.setWidth(20, Unit.PERCENTAGE);
+		vLayout.setWidth(10, Unit.PIXELS);
 		hLayout.addComponent(vLayout);
 		
 		return hLayout;
 	}
 	
 	private VerticalLayout getVButtonCRUDBar(){
-		VerticalLayout vLayout = new VerticalLayout();
+		VerticalLayout vLayout = new VerticalLayout();		
 		Button btnAdd = new Button(VaadinIcons.ADD_DOCK);
 		Button btnEdit = new Button(VaadinIcons.EDIT);
 		Button btnDelete = new Button(VaadinIcons.DEL);

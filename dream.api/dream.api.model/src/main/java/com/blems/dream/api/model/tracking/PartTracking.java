@@ -43,6 +43,10 @@ public class PartTracking extends DefaultModel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	@Override
+	public String toString() {		
+		return getAbbr() +" (" + getType().getName() +")";
+	}
 	
 	
 
