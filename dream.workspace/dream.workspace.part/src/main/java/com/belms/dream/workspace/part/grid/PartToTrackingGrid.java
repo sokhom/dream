@@ -1,6 +1,8 @@
 package com.belms.dream.workspace.part.grid;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,9 +12,8 @@ import com.belms.dream.api.view.event.SaveEntityListener;
 import com.belms.dream.workspace.part.AbstractGridCRUDButtonBar;
 import com.belms.dream.workspace.part.comps.AddPartToTrackingView;
 import com.blems.dream.api.model.part.PartToTracking;
+import com.blems.dream.api.model.tracking.PartTracking;
 import com.vaadin.data.ValueProvider;
-import com.vaadin.data.provider.CallbackDataProvider;
-import com.vaadin.data.provider.DataProvider;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Window;
@@ -99,7 +100,19 @@ public class PartToTrackingGrid extends AbstractGridCRUDButtonBar<PartToTracking
 
 	@Override
 	protected Window getNewView() {
-		AddPartToTrackingView window = new AddPartToTrackingView(this,OPER_TYPE.ADD,this.partInitDataWrapper.getPartTrackings());
+		AddPartToTrackingView window = new AddPartToTrackingView(this,OPER_TYPE.ADD,this.partInitDataWrapper.getPartTrackings());		
+		window.setDataFilter(event->{
+			final Map<String, PartToTracking> map= addPartToTrackinIntoMap(getDataList());
+			List<PartTracking> list = new ArrayList<>();
+			for (Iterator<PartTracking> iterator = event.iterator(); iterator.hasNext();) {
+				PartTracking partTracking =  iterator.next();
+				if(map.get(partTracking.getName())==null){
+					list.add(partTracking);
+				}
+				System.out.println(partTracking.getName());
+			}
+			return list; 
+		});
 		window.initView();
 		return window;
 	}
@@ -121,6 +134,7 @@ public class PartToTrackingGrid extends AbstractGridCRUDButtonBar<PartToTracking
 		return this;
 	}
 
+	
 
 	/*@Override
 	public void loadData(List<PartToTracking> data) {	
@@ -142,13 +156,14 @@ public class PartToTrackingGrid extends AbstractGridCRUDButtonBar<PartToTracking
 		setDataProvider(searchListDataProvider);
 	}*/
 	
-	private void addPartToTrackinIntoMap(List<PartToTracking> partToTrackings){
-		if(partToTrackingMap==null){
-			 partToTrackingMap = new HashMap<>();
-		 }
+	private Map<String, PartToTracking>  addPartToTrackinIntoMap(List<PartToTracking> partToTrackings){
+		
+		Map<String, PartToTracking>  partToTrackingMap = new HashMap<>();
+		
 		for (PartToTracking partTracking : partToTrackings) {
 			partToTrackingMap.put(partTracking.getPartTracking().getName(), partTracking);
 		}
+		return partToTrackingMap;
 	}
 	private PartToTracking getPartToTracking(String name){
 		 

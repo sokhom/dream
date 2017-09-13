@@ -116,4 +116,8 @@ public abstract class AbstractGridCRUDButtonBar<T> extends Panel implements Entr
 		return false;
 	}
 	
+	public List<T> getDataList(){		
+		return itemList;
+	}
+	
 }
