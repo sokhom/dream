@@ -13,4 +13,13 @@ public class PartTrackingType extends BasedModel2 {
 		setName(name);
 	}
 
+	@Override
+	public String toString() {
+		
+		return getName(); 
+	}
+	
+	
+	
+
 }

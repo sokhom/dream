@@ -9,11 +9,15 @@ import java.util.List;
 
 import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
 import com.belms.dream.api.view.EntryView;
+import com.belms.dream.api.view.event.SaveEntityListener;
+import com.belms.dream.api.view.event.SaveEntityListener.OPER_TYPE;
+import com.belms.dream.workspace.part.grid.NewTrackingGrid;
 import com.blems.dream.api.model.part.Part;
 import com.blems.dream.api.model.part.PartToTracking;
 import com.blems.dream.api.model.tag.Tag;
 import com.blems.dream.api.model.tracking.PartTracking;
 import com.blems.dream.api.model.tracking.PartTrackingType;
+import com.blems.dream.api.model.tracking.TrackingText;
 import com.vaadin.data.Binder;
 import com.vaadin.data.ValueProvider;
 import com.vaadin.server.Setter;
@@ -40,14 +44,18 @@ public class InventoryTrackingView extends VerticalLayout  implements EntryView<
 	private static final String SERIAL_NUMBER_TRACKING = "Serial Number";
 	private static final String TEXT_TRACKING = "Text";
 	
-	
+	private SaveEntityListener<Tag> savEntityListenerTag;
 	private PartInitDataWrapperDto partInitDataWrapperDto;
 	private Binder<Tag> binder;
 	private Part part;
-	public InventoryTrackingView(PartInitDataWrapperDto partInitDataWrapperDto) {
-		this.binder = new Binder<>();
-		this.partInitDataWrapperDto = partInitDataWrapperDto;		
+	public InventoryTrackingView(SaveEntityListener<Tag> savEntityListenerTag,OPER_TYPE operType,PartInitDataWrapperDto partInitDataWrapperDto) {
+		this.binder = new Binder<>();		
+		this.savEntityListenerTag = savEntityListenerTag;
+		this.partInitDataWrapperDto = partInitDataWrapperDto;	
+		this.binder.setBean(savEntityListenerTag.getBean(operType));
+		setSizeFull();
 	}
+	
 	@Override
 	public boolean isValid() {		
 		return false;
@@ -62,8 +70,8 @@ public class InventoryTrackingView extends VerticalLayout  implements EntryView<
 	public void loadData(Part data) {		
 //		List<PartToTracking> partTTrackints = data.getPartToTrackings();
 		this.part = data;
-		Tag tag = part.getTags().get(0);
-		this.binder.setBean(tag);
+//		Tag tag = part.getTags().get(0);
+//		this.binder.setBean(tag);
 		initUI();
 	}
 	
@@ -73,6 +81,7 @@ public class InventoryTrackingView extends VerticalLayout  implements EntryView<
 			removeAllComponents();
 		}
 		final FormLayout formLayout = new FormLayout();
+		formLayout.setSizeFull();
 		formLayout.addStyleName(ValoTheme.FORMLAYOUT_LIGHT);
 		formLayout.setMargin(new MarginInfo(true, true, false, true));
 		addComponent(formLayout);
@@ -85,12 +94,13 @@ public class InventoryTrackingView extends VerticalLayout  implements EntryView<
 			String trackingName =pTracking.getName();
 			boolean isSelected = partToTracking.isSelectedFlag();
 			
-			if(isSelected){
+//			if(isSelected){
 				if(TEXT_TRACKING.equals(trackingType)){
-					final TextField lotText = new TextField(trackingName);					
+					/*final TextField lotText = new TextField(trackingName);					
 					ValueProvider<Tag,String> getter = source ->source.getTrackingTextMapping(pTracking).getInfo();	
 					Setter<Tag, String> setter =(bean,fieldvalue)->{bean.getTrackingTextMapping(pTracking).setInfo(fieldvalue);};
-					binder.forField(lotText).bind(getter, setter);					
+					binder.forField(lotText).bind(getter, setter);		*/		
+					final TextField lotText = new TextTracking(OPER_TYPE.ADD,partToTracking);
 					formLayout.addComponent(lotText);						
 				}if(CHECK_BOX_TRACKING.equals(trackingType)){
 					final TextField lotText = new TextField(trackingName);					
@@ -163,10 +173,62 @@ public class InventoryTrackingView extends VerticalLayout  implements EntryView<
 					formLayout.addComponent(expireDateText);				
 				}else if(SERIAL_NUMBER_TRACKING.equals(trackingType)){
 					//			
+					NewTrackingGrid trackingGrid = new NewTrackingGrid();
+					formLayout.addComponent(trackingGrid);					
 				}
 			}
+//		}
+		
+	}
+	
+	public class TextTracking extends TextField implements EntryView<Tag>, SaveEntityListener<TrackingText>{
+		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		
+		private Binder<TrackingText> binder;
+		private PartToTracking partToTracking;
+		private OPER_TYPE operType;
+		public TextTracking(OPER_TYPE operType,PartToTracking partToTracking) {		
+			this.partToTracking = partToTracking;
+			this.operType = operType;
+			binder = new Binder<TrackingText>();
+			binder.setBean(getBean(operType));
+		}
+		@Override
+		public void save(TrackingText bean, OPER_TYPE type) {			
+			
 		}
 		
+		@Override
+		public TrackingText getBean(OPER_TYPE type) {
+			TrackingText text=null ;
+			if(OPER_TYPE.ADD==type){
+				 text = new TrackingText();
+			}
+			return text;
+		}
+
+		@Override
+		public boolean isValid() {			
+			return false;
+		}
+
+		@Override
+		public Component getView() {
+			setCaption(partToTracking.getPartTracking().getAbbr());
+			binder.forField(this).bind(TrackingText::getInfo,TrackingText::setInfo);
+			return this;
+		}
+
+		@Override
+		public void loadData(Tag data) {	
+//			TrackingText trackingText =	data.getTrackingTextMapping(this.partToTracking.getPartTracking());
+//			binder.setBean(trackingText);			
+		}
+
 	}
 	
 	

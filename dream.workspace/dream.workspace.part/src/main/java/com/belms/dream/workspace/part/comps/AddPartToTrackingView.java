@@ -1,10 +1,12 @@
+/**
+ * @author haysokhom
+ */
 package com.belms.dream.workspace.part.comps;
 
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import com.belms.dream.api.view.event.SaveEntityListener;
 import com.belms.dream.api.view.event.SaveEntityListener.OPER_TYPE;
 import com.belms.dream.workspace.common.window.AbstractSimpleDialog;
@@ -12,8 +14,6 @@ import com.blems.dream.api.model.part.PartToTracking;
 import com.blems.dream.api.model.tracking.PartTracking;
 import com.vaadin.data.Binder;
 import com.vaadin.data.provider.CallbackDataProvider;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Notification;
@@ -47,37 +47,26 @@ public class AddPartToTrackingView extends AbstractSimpleDialog {
 		    Notification.show(selected.size() + " items selected");
 		});
 		grid.addColumn(PartTracking::getAbbr).setCaption("Abbr");
+		grid.addColumn(PartTracking::getDescription).setCaption("Abbr");
 		grid.addColumn(PartTracking::getType).setCaption("Type");
 		loadData(partTrackings);
 	}
 
 	
 	@Override
-	protected String getDialogCaption() {
-		
+	protected String getDialogCaption() {		
 		return "Part Tracking";
 	}
 
 	@Override
 	protected void buildContentLayout(VerticalLayout parent) {		
-		
 //		parent.addComponent(pTrackingComb);
-		parent.addComponent(grid);
-		
-		final ClickListener clickListener = new ClickListener() {
-			
-			@Override
-			public void buttonClick(ClickEvent event) {
-				// TODO Auto-generated method stub
-				
-			}
-		};
+		parent.addComponent(grid);		
 		setOkButtonClickListener(event -> {
 //			if(!binder.validate().isOk()) {
 //				Notification.show("Input data is not valid", Type.ERROR_MESSAGE);
 //				return;
-//			}
-		
+//			}		
 			Set<PartTracking> selectItems= grid.getSelectedItems();
 			for (Iterator<PartTracking> iterator = selectItems.iterator(); iterator.hasNext();) {
 				PartTracking partTracking =  iterator.next();
@@ -85,21 +74,18 @@ public class AddPartToTrackingView extends AbstractSimpleDialog {
 				pToTracking.setPartTracking(partTracking);
 				saveEntityListener.save(pToTracking, getOperationType());
 				
-			}
-			
+			}			
 			close();
 //			binder.setBean(saveEntityListener.getBean(getOperationType()));
 //			addressTypeComboBox.focus();
 //			if(OPER_TYPE.EDIT == getOperationType()) {
 //				close();
 //			}
-		});
-		
+		});		
 	}
 	
 	public void loadData(List<PartTracking> partTrackings){
-//		pTrackingComb.setDataProvider(new CallbackDataProvider<PartTracking, String>(query->partTrackings.stream(), qyery->partTrackings.size()));
-		
+//		pTrackingComb.setDataProvider(new CallbackDataProvider<PartTracking, String>(query->partTrackings.stream(), qyery->partTrackings.size()));		
 		grid.setDataProvider(new CallbackDataProvider<PartTracking, String>(query->partTrackings.stream(), qyery->partTrackings.size()));
 	}
 	

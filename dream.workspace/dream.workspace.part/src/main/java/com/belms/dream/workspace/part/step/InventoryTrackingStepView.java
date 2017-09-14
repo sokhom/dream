@@ -1,13 +1,15 @@
 package com.belms.dream.workspace.part.step;
 
 import com.belms.dream.api.dto.part.PartInitDataWrapperDto;
+import com.belms.dream.api.view.event.SaveEntityListener;
 import com.belms.dream.workspace.common.newview.StepView;
 import com.belms.dream.workspace.part.comps.InventoryTrackingView;
 import com.blems.dream.api.model.part.Part;
+import com.blems.dream.api.model.tag.Tag;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 
-public class InventoryTrackingStepView implements StepView<Part>{
+public class InventoryTrackingStepView implements StepView<Part>,SaveEntityListener<Tag>{
 
 	private VerticalLayout vLayout;
 	private PartInitDataWrapperDto partInitDataWrapperDto;
@@ -54,8 +56,17 @@ public class InventoryTrackingStepView implements StepView<Part>{
 		}
 		return true;
 	}
+	
+	@Override
+	public void save(Tag bean, OPER_TYPE type) {		
+		
+	}
+	@Override
+	public Tag getBean(OPER_TYPE type) {	
+		return new Tag();
+	}
 	private void initUI(){
-		tagTrackingView = new InventoryTrackingView(partInitDataWrapperDto);
+		tagTrackingView = new InventoryTrackingView(this,OPER_TYPE.ADD,partInitDataWrapperDto);
 		vLayout = new VerticalLayout();
 		vLayout.addComponent(tagTrackingView);
 	}
