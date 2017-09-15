@@ -113,11 +113,15 @@ public class Tag extends DefaultModel {
 	public TrackingText getTrackingTextMapping(PartTracking partTracking) {
 		TrackingText trackingText = trackingTextMapping.get(partTracking);		
 		if(trackingText==null){
-			trackingText = new TrackingText();
-			trackingTextMapping.put(partTracking, trackingText);
+//			trackingText = new TrackingText();
+//			trackingTextMapping.put(partTracking, trackingText);
 		}
 		return trackingText;
 	}
+	public void addTrackingTextMapping(PartTracking partTracking,TrackingText trackingText ){
+		trackingTextMapping.put(partTracking, trackingText);
+	}
+	
 	
 	public TrackingDate getTrackingDate() {
 		if(trackingDate==null){
